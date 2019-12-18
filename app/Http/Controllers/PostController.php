@@ -12,5 +12,7 @@ class PostController extends Controller
 
         $post->content = $req["post-content"];
         $post->save();
+
+        return redirect("/inicio");
     }
 }

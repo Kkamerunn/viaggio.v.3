@@ -12,7 +12,7 @@
     <div class="container my-2">
         <div class="row align-items-center">
             <div class="col-sm-12">
-                <form action="" method="POST">
+                <form action="/inicio" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="post-content">Viajaste?</label>
