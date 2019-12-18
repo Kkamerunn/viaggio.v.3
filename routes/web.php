@@ -23,6 +23,4 @@ Route::get('/inicio', 'InicioController@init')->name('inicio');
 
 Route::post('/inicio', 'PostController@uploadPost');
 
-Route::get('/perfil', function() {
-    return view('/perfil');
-});
+Route::get('/perfil', 'PerfilController@show');
