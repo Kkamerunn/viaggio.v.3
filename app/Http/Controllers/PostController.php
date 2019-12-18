@@ -11,6 +11,6 @@ class PostController extends Controller
         $post = new Post();
 
         $post->content = $req["post-content"];
-        
+        $post->save();
     }
 }
