@@ -20,16 +20,27 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/d9e6b5e683.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        @yield('header')    
-    </header>
-    <main>
-        @yield('content')    
-    </main>    
-    <footer>
-        
-    </footer>
+    <div class="d-flex flex-column">
+        <header class="mb-4">
+            @yield('header')    
+        </header>
+        <main class="mb-2">
+            @yield('content')    
+        </main>    
+        <footer class="bg-success">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        &copy;copy rights viaggio 2020
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
