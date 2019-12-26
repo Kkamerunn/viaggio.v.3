@@ -41,22 +41,27 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-4">
-                <aside>
-                    <div class="img bg-success border-primary">
-                        <img width="280px" src="/storage/{{ $userLog->avatar }}" alt="avatar">
-                    </div>
-                    <div class="links">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                              <a class="nav-link" href="#">Seguidores</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="#">Editar</a>
-                            </li>
-                          </ul>
+                <aside class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 img bg-success border-primary">
+                            <img src="/storage/{{ $userLog->avatar }}" alt="avatar" class="my-1">
+                        </div>
+                        <div class="col-12 links bg-success">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="#">Seguidores</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Personas que sigues</a>
+                                  </li>
+                                <li class="nav-item">
+                                  <a class="nav-link text-dark" href="#">Editar</a>
+                                </li>
+                              </ul>
+                        </div>
                     </div>
                 </aside>
             </div>
@@ -83,9 +88,17 @@
         </div>
     </div>
 
-    <style lang="scss">
+    <style>
         aside {
+            height: 100%;
+        }
 
+        aside img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            display: block;
         }
     </style>
 @endsection

@@ -16,7 +16,11 @@ class PostController extends Controller
         if ($userlog) {
             $post = new Post();
 
+            $path = $req->file("post-image")->store("public");
+            $nombreArchivo = basename($path);
+
             $post->content = $req["post-content"];
+            $post->image = $nombreArchivo;
             $post->user_id = $userlog->id;
 
             $post->save();

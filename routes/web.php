@@ -24,3 +24,11 @@ Route::get('/inicio', 'InicioController@init')->name('inicio');
 Route::post('/inicio', 'PostController@uploadPost');
 
 Route::get('/perfil', 'PerfilController@show');
+
+Route::get('/settings', function() {
+    return view('settings');
+});
+
+Route::get('/faq', function() {
+    return view('faq');
+});

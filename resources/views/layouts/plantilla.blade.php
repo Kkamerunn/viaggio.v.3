@@ -26,14 +26,14 @@
 </head>
 <body>
     <div class="d-flex flex-column">
-        <header class="mb-4">
+        <header class="mb-4 sticky-top">
             @yield('header')    
         </header>
-        <main class="mb-2">
+        <main class="mb-2 overflow-auto">
             @yield('content')    
         </main>    
         <footer class="bg-success">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-12">
                         &copy;copy rights viaggio 2020
@@ -42,5 +42,15 @@
             </div>
         </footer>
     </div>
+    <style>
+        footer {
+            height: 75px;
+        }
+
+        footer .col-12 {
+            top: 25px;
+        }
+    </style>
+    <script src="{{ asset('/js/lucas.js') }}"></script>
 </body>
 </html>
