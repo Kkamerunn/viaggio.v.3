@@ -37,7 +37,7 @@
                 </ul>
             </div>
             <div id="countries-selector" class="float-right">
-                <form action="POST">
+                <form action="" method="POST">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Select your country</label>
                         <div class="container">
@@ -104,6 +104,11 @@
                                 </div>
                             @endif
                         </div>
+                    <form action="/personas_seguidas" method="POST">
+                        @csrf
+                        <input type="hidden" name="persona" value="{{ $post->user_id }}">
+                        <button type="submit" class="">Seguir</button>
+                    </form>    
                 </div>
             @empty
                 <em>¡SE EL PRIMERO EN CONTAR TU EXPERIENCIA EN VIAGGIO!</em>

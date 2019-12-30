@@ -19,4 +19,12 @@ class PerfilController extends Controller
 
         return view('perfil', $vac);
     }
+
+    /*
+    public function follow() {
+        
+        $userLog = Auth::user();
+
+
+    }*/
 }

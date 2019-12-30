@@ -52,13 +52,13 @@
                         <div class="col-12 links bg-success">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                  <a class="nav-link text-dark" href="#">Seguidores</a>
+                                  <a class="nav-link text-dark" href="/seguidores">Seguidores</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" href="#">Personas que sigues</a>
+                                    <a class="nav-link text-dark" href="/personas_seguidas">Personas que sigues</a>
                                   </li>
                                 <li class="nav-item">
-                                  <a class="nav-link text-dark" href="#">Editar</a>
+                                  <a class="nav-link text-dark" href="/editar">Editar</a>
                                 </li>
                               </ul>
                         </div>

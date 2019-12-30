@@ -23,6 +23,8 @@ Route::get('/inicio', 'InicioController@init')->name('inicio');
 
 Route::post('/inicio', 'PostController@uploadPost');
 
+// Route::post('/perfil', 'PerfilController@follow');
+
 Route::get('/perfil', 'PerfilController@show');
 
 Route::get('/settings', function() {
@@ -31,4 +33,14 @@ Route::get('/settings', function() {
 
 Route::get('/faq', function() {
     return view('faq');
+});
+
+Route::get('/personas_seguidas', 'FollowerController@following');
+
+Route::post('/personas_seguidas', 'FollowerController@follow');
+
+Route::get('/seguidores', 'FollowerController@followers');
+
+Route::get('/editar', function() {
+    return view('editar');
 });
