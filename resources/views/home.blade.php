@@ -5,8 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-            <div class="card-header">Bienvenido {{ Auth::user()->user_name ? Auth::user()->name : Auth::user()->name }}</div>
-
+            
+            @if (Auth::user()->user_name)
+                <div class="card-header">Bienvenido {{ Auth::user()->user_name }}</div>    
+            @else 
+                <div class="card-header">Bienvenido {{ Auth::user()->name }}</div>
+            @endif    
+            
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">

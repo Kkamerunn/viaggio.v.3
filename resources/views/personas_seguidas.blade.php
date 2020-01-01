@@ -6,14 +6,14 @@
     
 @endsection
 
+<!--Arreglar este código para que se vea-->
+
 @section('content')
-    @forelse ($peopleFollowed as $item) 
-        @if ($item->followed_id->user_name)
-            <p>{{ $item->followed_id->user_name }}</p><br>   
-        @else 
-            <p>{{ $item->followed_id->name }}</p><br>
+    @forelse ($peopleFollowed as $item)
+        @if ($item->follower_id == $userLog->id)
+            <p>Sigues al usuario {{ $item->seguidos->name }}</p><br>
         @endif
     @empty
         <p>Actualmente no sigues a nadie, empieza a seguir <a href="/inicio">aqui</a></p>
-    @endforelse
+    @endforelse   
 @endsection

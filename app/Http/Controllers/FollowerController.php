@@ -5,47 +5,46 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Follower;
+use App\User;
 
 class FollowerController extends Controller
 {
     public function follow(Request $req) {
         $userLog = Auth::user();
+        $followerTab = Follower::all();
 
         if ($userLog) {
             
-            $follower = new Follower();
-            $follower->followed_id = $req["persona"]; 
-            $follower->follower_id = $userLog->id;
-            $follower->save();
+            foreach ($followerTab as $item) {
+                if ($item->follower_id == $userLog->id && $item->followed_id == $req["persona"]) {
+                    // completar esta funcion
+                } else {
+                    $follower = new Follower();
+                    $follower->followed_id = $req["persona"]; 
+                    $follower->follower_id = $userLog->id;
+                    $follower->save();
 
-            return redirect('/personas_seguidas');
+                    return redirect('/personas_seguidas');
+                }
+            }
 
         } else {
             return redirect('/welcome');
         }
     }
 
+        
     public function following() {
+        
         $userLog = Auth::user();
 
-        $peopleFollowed = Follower::where($userLog->id, 'follower_id')
-            ->orderBy('created_at')
-            ->get();
+        $peopleFollowed = Follower::all();
 
-        $vac = compact('peopleFollowed', 'userLog');
+        $vac = compact("peopleFollowed", "userLog");
 
-        return view('personas_seguidas', $vac);
+        return view("personas_seguidas", $vac);
     }
 
-    public function followers() {
-        $userLog = Auth::user();
 
-        $followers = Follower::where($userLog->id, '==', 'followed_id')
-            ->orderBy('created_at')
-            ->get();
 
-        $vac = compact('followers','userLog');
-
-        return view('seguidores', $vac);
-    }
 }

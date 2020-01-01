@@ -23,8 +23,6 @@ Route::get('/inicio', 'InicioController@init')->name('inicio');
 
 Route::post('/inicio', 'PostController@uploadPost');
 
-// Route::post('/perfil', 'PerfilController@follow');
-
 Route::get('/perfil', 'PerfilController@show');
 
 Route::get('/settings', function() {

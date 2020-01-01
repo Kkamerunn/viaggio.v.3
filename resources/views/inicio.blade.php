@@ -95,6 +95,9 @@
             @forelse ($posts as $post)
                 <div class="container-fluid my-1">
                         <div class="col-12 w-100 m-0" id="post-container">
+                            <div class="post-user">
+                                {{ $post->postUser->name }}
+                            </div>
                             <div class="post-text-content">
                                 <p>{{ $post->content }}</p>
                             </div>
