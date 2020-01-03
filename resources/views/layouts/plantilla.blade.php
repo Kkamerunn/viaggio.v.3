@@ -23,34 +23,52 @@
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/d9e6b5e683.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="d-flex flex-column">
-        <header class="mb-4 sticky-top">
-            @yield('header')    
-        </header>
-        <main class="mb-2 overflow-auto">
-            @yield('content')    
-        </main>    
-        <footer class="bg-success">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        &copy;copy rights viaggio 2020
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+
     <style>
+        html {
+            height: auto;
+        }
+
+        body {
+            height: inherit;
+        }
+
+        header {
+            height: 15%;
+        }
+
+        main {
+            height: 70%;
+        }
+
         footer {
-            height: 75px;
+            height: 60px;
+            background-color: #8854d0;
+            color: #d1d8e0;
+            position: relative;
+            bottom: 0;
         }
 
         footer .col-12 {
-            top: 25px;
+            top: 20px;
         }
     </style>
-    <script src="{{ asset('/js/lucas.js') }}"></script>
+</head>
+<body>
+    <header class="sticky-top">
+        @yield('header')    
+    </header>
+    <main class="overflow-auto">
+        @yield('content')    
+    </main>    
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    &copy;copy rights viaggio 2020
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

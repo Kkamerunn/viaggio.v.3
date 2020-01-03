@@ -8,6 +8,8 @@ var countrySelector = document.getElementById('exampleFormControlSelect1');
 
 var countrySelectorImg = document.querySelector("#image-container [alt='bandera']");
 
+var main = document.getElementById("principal");
+
 /*
 ------------
 Default flag
@@ -38,8 +40,18 @@ fetch('https://restcountries.eu/rest/v2/all')
 
 var selectorOptions = countrySelector.options;
 
+/*
+---------
+Functions
+---------
+*/
+
 function setSelectorImage(url) {
-        countrySelectorImg.src = url;
+    countrySelectorImg.src = url;
+}
+
+function setBgColor() {
+    main.style.backgroundColor = localStorage.getItem(localStorage.key(0));
 }
 
 /*
@@ -52,6 +64,12 @@ countrySelector.addEventListener('change', event => {
     let flag = flags.find(elem => elem.name === event.target.value);
     setSelectorImage(flag.imgUrl);
 });
+
+window.addEventListener('load', () => {
+    setBgColor();
+});
+
+
 
 
 
