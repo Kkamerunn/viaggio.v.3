@@ -48,7 +48,7 @@
                             <input type="password" class="form-control" name="new-pass" id="new-pass">  
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    <button type="submit" class="btn btn-warning">Guardar cambios</button>
                 </form>
             </div>
         </div>
