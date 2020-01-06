@@ -32,3 +32,7 @@ Route::get('/settings', function() {
 Route::get('/faq', function() {
     return view('faq');
 });
+
+Route::get('/editar', 'EditarController@index')->name('editar');
+
+Route::put('/editar/{id}', 'EditarController@editar')->name('editar');

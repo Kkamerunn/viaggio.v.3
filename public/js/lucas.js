@@ -10,6 +10,10 @@ var countrySelectorImg = document.querySelector("#image-container [alt='bandera'
 
 var main = document.getElementById("principal");
 
+var textAreaLabel = document.querySelector("[for='post-content']");
+
+var textArea = document.getElementById("post-content");
+
 /*
 ------------
 Default flag
@@ -67,6 +71,10 @@ countrySelector.addEventListener('change', event => {
 
 window.addEventListener('load', () => {
     setBgColor();
+});
+
+textAreaLabel.addEventListener('click', () => {
+    textArea.classList.toggle('textarea');
 });
 
 

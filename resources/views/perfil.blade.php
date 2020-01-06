@@ -83,7 +83,7 @@
                                     <a class="nav-link text-dark" href="#">Personas que sigues</a>
                                   </li>
                                 <li class="nav-item">
-                                  <a class="nav-link text-dark" href="#">Editar</a>
+                                  <a class="nav-link text-dark" href="/editar">Editar</a>
                                 </li>
                               </ul>
                         </div>
