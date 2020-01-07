@@ -11,21 +11,33 @@ class FollowerController extends Controller
 {
     public function follow(Request $req) {
         $userLog = Auth::user();
-        $followerTab = Follower::all();
+        $userLogId = $userLog->id;
+        $followerTab = Follower::where('follower_id', $userLogId)->get();
+        
 
         if ($userLog) {
-            
-            foreach ($followerTab as $item) {
-                if ($item->follower_id == $userLog->id && $item->followed_id == $req["persona"]) {
-                    // completar esta funcion
-                } else {
-                    $follower = new Follower();
-                    $follower->followed_id = $req["persona"]; 
-                    $follower->follower_id = $userLog->id;
-                    $follower->save();
 
-                    return redirect('/personas_seguidas');
+            if ($followerTab == null) {
+                $follower = new Follower();
+                $follower->followed_id = $req["persona"]; 
+                $follower->follower_id = $userLogId;
+                $follower->save();
+
+                return redirect('/personas_seguidas');
+            } else { 
+                foreach ($followerTab as $item) {
+                    if ($item->followed_id != $req["persona"]) {
+                        continue;
+                    } else {
+                        return;
+                    }
                 }
+                $follower = new Follower();
+                $follower->followed_id = $req["persona"]; 
+                $follower->follower_id = $userLogId;
+                $follower->save();
+
+                return redirect('/personas_seguidas');
             }
 
         } else {
@@ -37,12 +49,13 @@ class FollowerController extends Controller
     public function following() {
         
         $userLog = Auth::user();
+        $userLogId = $userLog->id;
 
-        $peopleFollowed = Follower::all();
+        $peopleFollowed = Follower::where('follower_id', $userLogId)->get();
 
-        $vac = compact("peopleFollowed", "userLog");
+        $vac = compact('peopleFollowed');
 
-        return view("personas_seguidas", $vac);
+        return view('personas_seguidas', $vac);
     }
 
 

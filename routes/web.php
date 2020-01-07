@@ -39,6 +39,4 @@ Route::post('/personas_seguidas', 'FollowerController@follow');
 
 Route::get('/seguidores', 'FollowerController@followers');
 
-Route::get('/editar', function() {
-    return view('editar');
-});
+

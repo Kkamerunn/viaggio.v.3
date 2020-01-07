@@ -14,11 +14,10 @@ class CreateFollowersTable extends Migration
     public function up()
     {
         Schema::create('followers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('follower_id');
-            $table->foreign('follower_id')->references('id')->on('users');
             $table->unsignedBigInteger('followed_id');
             $table->foreign('followed_id')->references('id')->on('users');
+            $table->unsignedBigInteger('follower_id');
+            $table->foreign('follower_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
