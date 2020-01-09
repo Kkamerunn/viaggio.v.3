@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Follower extends Model
 {
-    public $table = "followers";
-
     public $guarded = [];
 
     // Relacion con User
@@ -22,8 +20,11 @@ class Follower extends Model
         return $this->belongsToMany("App\User", "followers", "followed_id", "follower_id");
     }*/
 
+    public function follower() {
+        return $this->belongsTo("App\User", "follower_id");
+    }
     
-    public function user() {
+    public function followed() {
         return $this->belongsTo("App\User", "followed_id");
     }
 

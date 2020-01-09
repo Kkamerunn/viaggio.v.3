@@ -9,7 +9,13 @@
 <!--Arreglar este código para que se vea-->
 
 @section('content')
-    @foreach ($peopleFollowed as $item) 
-        <p>Estas siguiendo a {{ $item->user->name }}</p><br>
+    @foreach ($followers as $follower) 
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-8 mx-auto">
+                    <p>Estas siguiendo a {{ dd($follower->followed->name) }}</p><br>
+                </div>
+            </div>
+        </div>
     @endforeach
 @endsection

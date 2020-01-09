@@ -51,9 +51,9 @@ class FollowerController extends Controller
         $userLog = Auth::user();
         $userLogId = $userLog->id;
 
-        $peopleFollowed = Follower::where('follower_id', $userLogId)->get();
+        $followers = collect(Follower::where('follower_id', $userLogId)->get()); 
 
-        $vac = compact('peopleFollowed');
+        $vac = compact('followers');
 
         return view('personas_seguidas', $vac);
     }
