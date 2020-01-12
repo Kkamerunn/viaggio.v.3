@@ -115,7 +115,7 @@
             @endforelse
         </div>
     </div>
-    <script src="{{ asset('/js/lucas.js') }}"></script>
+    <script src="{{ asset('/js/inicio.js') }}"></script>
     <style>
         #image-container img{
             border-radius: 50%;

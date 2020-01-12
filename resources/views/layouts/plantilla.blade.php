@@ -7,6 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Icon -->
+    <link rel="shortcut icon" href="/storage/viaggio.png">
+
     <title>
         @yield('title')
     </title>
@@ -34,23 +37,32 @@
         }
 
         header {
-            height: 15%;
+            height: inherit;
         }
 
         main {
-            height: 70%;
+            height: inherit;
         }
 
         footer {
-            height: 60px;
-            background-color: #8854d0;
+            height: inherit;
+            background-color: white;
             color: #d1d8e0;
             position: relative;
             bottom: 0;
+            left: 0;
+            width: 100%;
+            opacity: 1;
         }
 
-        footer .col-12 {
-            top: 20px;
+
+        footer .nav-link {
+            color: black;
+        }
+
+        img[alt=logo] {
+            height: 100%;
+            width: 300px;
         }
     </style>
 </head>
@@ -58,15 +70,56 @@
     <header class="sticky-top">
         @yield('header')    
     </header>
-    <main class="overflow-auto">
+    <main class="">
         @yield('content')    
     </main>    
     <footer>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    &copy;copy rights viaggio 2020
+        <div class="d-flex justify-content-center pt-5">
+            <div class="container">
+                <div class="col-7 mx-auto">
+                    <div class="row justify-content-center">
+                        <div class="col-7">
+                            <img src="/storage/viaggio-gris.png" alt="logo">
+                        </div>
+                        <div class="col-7">
+                            <p>Al suscribirte se te abre un mundo de posibilidades para conocer loque hacen otras personas cuando viajan y llenarte de ideas para tu proximo viaje</p>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-7 mx-auto">
+                    <div class="row justify-content-center">
+                        <ul class="navbar-nav d-flex flex-row">
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link">INICIO</a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link">AYUDA</a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link">CONTACTO</a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link">FAQS</a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link">TERMINOS Y CONDICIONES</a>
+                            </li>
+                        </ul>
+                    </div> 
+                </div> 
+                <div class="col-7 mx-auto">
+                    <div class="row justify-content-center">
+                        <div class="col-7">
+                            &copy;copy rights viaggio 2020
+                        </div>
+                    </div>
+                </div>
+                <!-- Icons -->
+                <div class="col-7 mx-auto">
+                    <div class="row justify-content-center">
+    
+                    </div>
+                </div>  
             </div>
         </div>
     </footer>
