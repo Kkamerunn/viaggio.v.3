@@ -35,7 +35,7 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">INICIAR SESION</a>
+                            <a class="nav-link" href="{{ route('login') }}"><i class="far fa-user-circle"></i>   INICIAR SESION</a>
                         </li>
                     @else
                         <li class="nav-item dropdown">
@@ -59,7 +59,9 @@
                 </ul>
             </div>
         </div>
+        <!-- Separador -->
         <div class="row separador"></div>
+        <!-- Mensaje y fondo -->
         <div class="row align-items-center">
             <div class="col-0 col-sm-6"></div>
             <div class="col-12 col-sm-6 middle-title">
@@ -76,9 +78,11 @@
         <div class="col-12 presentation pb-4 text-center">
             <strong>REGISTRATE Y CONTÁ TU EXPERIENCIA!</strong>
         </div>
+        <!-- photo -->
         <div class="col-12 col-md-5">
-            <img src="/storage/turistic-photographer.jpg" alt="fotografa">
+            <img src="/storage/getting-rid-of-all.jpg" alt="fotografa">
         </div>
+        <!-- form -->
         <div class="col-12 col-md-5">
             <div class="d-flex flex-column">
                 <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
@@ -180,6 +184,12 @@
         overflow-y: hidden;
     }
 
+    header i {
+            color: #badc58;
+            font-size: 25px;
+            margin-right: 8px;
+        }
+
     .nav-container {
         height: 100px;
     }
@@ -204,7 +214,11 @@
 
     main {
         padding: 100px;
-        background-color: #dff9fb;
+        background-color: #f5f8fa;
+    }
+
+    form label {
+        font-size: large;
     }
 
     .presentation {

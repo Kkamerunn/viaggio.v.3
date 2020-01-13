@@ -55,6 +55,10 @@
             opacity: 1;
         }
 
+        footer i {
+            color: #badc58;
+            font-size: 25px;
+        }
 
         footer .nav-link {
             color: black;
@@ -76,6 +80,7 @@
     <footer>
         <div class="d-flex justify-content-center pt-5">
             <div class="container">
+                <!-- Bienvenida -->
                 <div class="col-7 mx-auto">
                     <div class="row justify-content-center">
                         <div class="col-7">
@@ -86,12 +91,15 @@
                         </div>
                     </div>
                 </div>
+                <!-- Ayuda -->
                 <div class="col-7 mx-auto">
                     <div class="row justify-content-center">
                         <ul class="navbar-nav d-flex flex-row">
-                            <li class="nav-item px-2">
-                                <a href="" class="nav-link">INICIO</a>
-                            </li>
+                            @auth
+                                <li class="nav-item px-2">
+                                    <a href="/inicio" class="nav-link">INICIO</a>
+                                </li>
+                            @endauth    
                             <li class="nav-item px-2">
                                 <a href="" class="nav-link">AYUDA</a>
                             </li>
@@ -99,7 +107,7 @@
                                 <a href="" class="nav-link">CONTACTO</a>
                             </li>
                             <li class="nav-item px-2">
-                                <a href="" class="nav-link">FAQS</a>
+                                <a href="/faq" class="nav-link">FAQS</a>
                             </li>
                             <li class="nav-item px-2">
                                 <a href="" class="nav-link">TERMINOS Y CONDICIONES</a>
@@ -107,17 +115,28 @@
                         </ul>
                     </div> 
                 </div> 
+                <!-- Copy rights -->
                 <div class="col-7 mx-auto">
                     <div class="row justify-content-center">
                         <div class="col-7">
-                            &copy;copy rights viaggio 2020
+                            &copy;2020. All rights reserved 
                         </div>
                     </div>
                 </div>
                 <!-- Icons -->
                 <div class="col-7 mx-auto">
                     <div class="row justify-content-center">
-    
+                        <ul class="navbar-nav d-flex flex-row">
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link"><i class="fab fa-facebook-square"></i></a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link"><i class="fab fa-instagram"></i></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>  
             </div>
