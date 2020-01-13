@@ -17,6 +17,9 @@ class InicioController extends Controller
         return view('inicio', $vac);
     } 
     
-    
+    public function displayComments() {
+        $comments = Comment::all();
+        return view('inicio', compact('comments'));
+    }
 
 }

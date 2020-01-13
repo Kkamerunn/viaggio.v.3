@@ -108,7 +108,15 @@
                                 <img src="/storage/{{ $post->image }}" alt="Post image" class="img-fluid rounded">
                             </div>
                         @endif
-                    </div>    
+                    </div> 
+                    @auth
+                        <div>
+                            <form action="/comments" method="POST" enctype="multipart/form-data">
+                            @csrf    
+                                <input type="text" name="comment-content" id="comment-content" placeholder="comenta...">
+                            </form>    
+                        </div>    
+                    @endauth   
                 </div>
             @empty
                 <em>¡SE EL PRIMERO EN CONTAR TU EXPERIENCIA EN VIAGGIO!</em>

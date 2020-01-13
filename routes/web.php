@@ -36,3 +36,5 @@ Route::get('/faq', function() {
 Route::get('/editar', 'EditarController@index')->name('editar');
 
 Route::put('/editar/{id}', 'EditarController@editar')->name('editar');
+
+Route::post('/comments', 'CommentController@uploadComment');
