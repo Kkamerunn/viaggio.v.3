@@ -15,7 +15,7 @@ class CommentController extends Controller
             $comment = new Comment();
 
             $comment->comments = $req["comment-content"];
-            $commnet->post_id = $post->id;
+            $comment->post_id = $req["post-comment-id"];
             $comment->user_id = $userlog->id;
             $comment->save();
 

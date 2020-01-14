@@ -74,7 +74,7 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <button type="submit">
+                        <button type="submit" id="submit-post">
                             <i class='far fa-paper-plane'></i> 
                         </button>
                     </div>
@@ -84,7 +84,7 @@
         <hr>
         <div class="row overflow-auto">
             @forelse ($posts as $post)
-                <div class="post-container col-11 w-100 mx-auto my-2">
+                <div class="post-container col-7 w-100 mx-auto my-2">
                     <div class="post-user-identifier pt-2">
                         <div class="user-avatar">
                             <img src="/storage/{{ $post->postUser->avatar }}" alt="image">
@@ -110,21 +110,23 @@
                         @endif
                     </div> 
                     @guest
-                        <div>
-                            <form action="/comments" method="POST" enctype="multipart/form-data">
-                            @csrf    
-                                <input type="text" name="comment-content" id="comment-content" placeholder="comenta..." disabled data-container="body" data-toggle="popover" data-placement="right" data-content="debes ingresar en tu cuenta para comentar">
-                            </form>    
-                        </div>  
+                        <div class="comentar" disabled>Comentar</div>  
                     @endguest
                     @auth
-                        <div>
-                            <form action="/comments" method="POST" enctype="multipart/form-data">
+                        <div class="commentDiv">
+                            <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                            <button class="comentar"><i class="fas fa-comment"></i>Comentar</button>
+                            <form action="/comments" method="POST" enctype="multipart/form-data" class="comments-form">
                             @csrf    
-                                <input type="text" name="comment-content" id="comment-content" placeholder="comenta..." maxlenght="500">
+                                <input type="text" name="comment-content" class="comment-content" placeholder="comenta..." maxlenght="500">
+                                <input type="hidden" name="post-comment-id" value="{{ $post->id }}">
+                                <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
                             </form>    
                         </div>    
-                    @endauth   
+                    @endauth
+                    <div class="comentarios">
+                        
+                    </div>   
                 </div>
             @empty
                 <em>¡SE EL PRIMERO EN CONTAR TU EXPERIENCIA EN VIAGGIO!</em>
@@ -211,7 +213,7 @@
             align-items: center; 
         }
 
-        button[type=submit] {
+        #submit-post {
             background-color: #4b7bec;
             border: 0;
             transition: background-color 1s;
@@ -221,6 +223,70 @@
 
         button[type=submit]:active {
             background-color: aquamarine;
+        }
+
+        .comments-form {
+            display: none;
+        }
+
+        .comentar {
+            background-color: #45aaf2;
+            font-weight: bold;
+            border: none;
+            color: aliceblue;
+            border-radius: 15px;
+            margin-bottom: 4px;
+            transition: background-color 0.5s;
+        }
+
+        .likes {
+            background-color: #45aaf2;
+            font-weight: bold;
+            border: none;
+            color: aliceblue;
+            border-radius: 15px;
+            margin-bottom: 4px;
+            transition: background-color 0.5s;
+        }
+
+        .fa-comment {
+            padding-right: 3px;
+        }
+
+        .fa-thumbs-up {
+            padding-right: 3px;
+        }
+
+        .comentar:hover {
+            background-color: aquamarine;
+            cursor: pointer;
+        }
+
+        .likes:hover {
+            background-color: aquamarine;
+            cursor: pointer;
+        }
+
+        .comment-content {
+            height: auto;
+            width: 90%;
+            background-color: #dfe6e9;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .submit-comment {
+            background-color: #45aaf2;
+            /*color: #8854d0;*/
+            border: none;
+            border-radius: 50%;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .submit-comment:hover {
+            color: antiquewhite;
+            background-color: #4b7bec;
+            cursor: pointer;
         }
     </style>
 @endsection

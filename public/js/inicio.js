@@ -14,6 +14,20 @@ var textAreaLabel = document.querySelector("[for='post-content']");
 
 var textArea = document.getElementById("post-content");
 
+var commentForm = document.querySelectorAll(".comments-form");
+
+var comments = document.querySelectorAll(".comentar");
+
+var commentButton = document.querySelectorAll(".submit-content"); 
+
+var commentInput = document.querySelectorAll(".comment-content");
+
+var commentDiv = document.querySelectorAll(".commentDiv");
+
+var numOfLikes = document.querySelector("sup");
+
+var likes = document.querySelectorAll(".likes");
+
 /*
 ------------
 Default flag
@@ -58,6 +72,23 @@ function setBgColor() {
     main.style.backgroundColor = localStorage.getItem(localStorage.key(0));
 }
 
+function displayCommentInput(event) {
+    if (event.target.nextElementSibling.style.display == "none") {
+        setTimeout(() => {
+            event.target.nextElementSibling.style.display = "block";
+        }, 200);
+    } else {
+        setTimeout(() => {
+            event.target.nextElementSibling.style.display = "none";
+        }, 200);
+    }
+}
+
+function displayLikes(event) {
+    let num = 0;
+    event.target.nextElementSibling.innerHTML = ++num; 
+}
+
 /*
 ---------------
 Event Listeners
@@ -77,7 +108,13 @@ textAreaLabel.addEventListener('click', () => {
     textArea.classList.toggle('textarea');
 });
 
+for (let i = 0; i < comments.length; i++) {
+    comments[i].addEventListener('click', displayCommentInput);
+}
 
+for (let i = 0; i < likes.length; i++) {
+    likes[i].addEventListener('click', displayLikes);
+}
 
 
 
