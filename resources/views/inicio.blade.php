@@ -109,11 +109,19 @@
                             </div>
                         @endif
                     </div> 
+                    @guest
+                        <div>
+                            <form action="/comments" method="POST" enctype="multipart/form-data">
+                            @csrf    
+                                <input type="text" name="comment-content" id="comment-content" placeholder="comenta..." disabled data-container="body" data-toggle="popover" data-placement="right" data-content="debes ingresar en tu cuenta para comentar">
+                            </form>    
+                        </div>  
+                    @endguest
                     @auth
                         <div>
                             <form action="/comments" method="POST" enctype="multipart/form-data">
                             @csrf    
-                                <input type="text" name="comment-content" id="comment-content" placeholder="comenta...">
+                                <input type="text" name="comment-content" id="comment-content" placeholder="comenta..." maxlenght="500">
                             </form>    
                         </div>    
                     @endauth   
