@@ -18,6 +18,8 @@ var commentForm = document.querySelectorAll(".comments-form");
 
 var comments = document.querySelectorAll(".comentar");
 
+var responses = document.querySelectorAll(".responder");
+
 var commentButton = document.querySelectorAll(".submit-content"); 
 
 var commentInput = document.querySelectorAll(".comment-content");
@@ -114,6 +116,10 @@ for (let i = 0; i < comments.length; i++) {
 
 for (let i = 0; i < likes.length; i++) {
     likes[i].addEventListener('click', displayLikes);
+}
+
+for (let i = 0; i < responses.length; i++) {
+    responses[i].addEventListener('click', displayCommentInput);
 }
 
 

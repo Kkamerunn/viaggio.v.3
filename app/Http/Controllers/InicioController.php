@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use Auth;
 use App\Comment;
+use App\Response;
 
 class InicioController extends Controller
 {
@@ -14,7 +15,8 @@ class InicioController extends Controller
 
         $posts = Post::all();
         $comments = Comment::all();
-        $vac = compact('posts', 'comments');
+        $responses = Response::all();
+        $vac = compact('posts', 'comments', 'responses');
 
         return view('inicio', $vac);
     } 

@@ -38,3 +38,5 @@ Route::get('/editar', 'EditarController@index')->name('editar');
 Route::put('/editar/{id}', 'EditarController@editar')->name('editar');
 
 Route::post('/comments', 'CommentController@uploadComment');
+
+Route::post('/responses', 'ResponseController@uploadReponse');

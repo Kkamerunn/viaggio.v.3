@@ -16,4 +16,5 @@ class Post extends Model
     public function comment() {
         return $this->hasMany("App\Comment", "post_id");
     }
+
 }

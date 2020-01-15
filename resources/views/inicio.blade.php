@@ -83,6 +83,7 @@
         </div>
         <hr>
         <div class="row overflow-auto">
+            <!-- Posts -->
             @forelse ($posts as $post)
                 <div class="post-container col-7 w-100 mx-auto my-2">
                     <div class="post-user-identifier pt-2">
@@ -124,6 +125,7 @@
                             </form>    
                         </div>    
                     @endauth
+                    <!-- Comentarios -->
                     @foreach ($comments as $comment)
                         @if ($post->id == $comment->post_id)
                         <div class="comentarios">
@@ -143,8 +145,64 @@
                                         <p>{{ $comment->comments }}</p>
                                     </div>
                                 </div>
+                                <hr>
+                                @guest
+                                    <div class="comentar" disabled>Responder</div>  
+                                @endguest
+                                @auth
+                                    <div class="commentDiv">
+                                        <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                        <button class="responder"><i class="fas fa-comment"></i>Responder</button>
+                                        <form action="/responses" method="POST" enctype="multipart/form-data" class="comments-form mb-2">
+                                        @csrf    
+                                            <input type="text" name="response-content" class="comment-content" maxlenght="400">
+                                            <input type="hidden" name="comment-response-id" value="{{ $comment->id }}">
+                                            <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
+                                        </form>    
+                                    </div>    
+                                @endauth
                             </div>
                         </div>
+                        <!-- Respuestas de comentarios -->
+                            @foreach ($responses as $response)
+                                @if ($comment->id == $response->comment_id)
+                                    <div class="comentarios">
+                                        <div class="container">
+                                            <div class="row mt-3">
+                                                <div class="col-2">
+                                                    <img src="/storage/{{ $response->responseUser->avatar }}" alt="comment-user-avatar">
+                                                </div>
+                                                <div class="col-10">
+                                                    @if ($response->responseUser->user_name)
+                                                        <p>{{ $response->responseUser->user_name }}</p>
+                                                    @else
+                                                        <p>{{ $response->responseUser->name }}</p>
+                                                    @endif
+                                                </div>
+                                                <div class="col-12">
+                                                    <p>{{ $response->responses }}</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            @guest
+                                                <div class="comentar" disabled>Responder</div>  
+                                            @endguest
+                                            @auth
+                                                <div class="commentDiv">
+                                                    <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                                    <button class="comentar"><i class="fas fa-comment"></i>Responder</button>
+                                                    <form action="/responses" method="POST" enctype="multipart/form-data" class="responses-form mb-2">
+                                                    @csrf    
+                                                        <input type="text" name="response-content" class="comment-content" maxlenght="400">
+                                                        <input type="hidden" name="comment-response-id" value="{{ $comment->id }}">
+                                                        <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
+                                                    </form>    
+                                                </div>    
+                                            @endauth
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                         @endif
                     @endforeach   
                 </div>
@@ -203,7 +261,6 @@
             border-radius: 50%;
         }
 
-        
         .user-name-identifier {
             margin-left: 10px;
         }
@@ -249,7 +306,7 @@
             display: none;
         }
 
-        .comentar {
+        .comentar, .responder {
             background-color: #45aaf2;
             font-weight: bold;
             border: none;
@@ -277,12 +334,7 @@
             padding-right: 3px;
         }
 
-        .comentar:hover {
-            background-color: aquamarine;
-            cursor: pointer;
-        }
-
-        .likes:hover {
+        .comentar:hover, .responder:hover, .likes:hover {
             background-color: aquamarine;
             cursor: pointer;
         }
@@ -293,6 +345,7 @@
             background-color: #dfe6e9;
             border: none;
             border-radius: 15px;
+            padding: 7px 10px;
         }
 
         .submit-comment {
