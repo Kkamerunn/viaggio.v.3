@@ -124,9 +124,29 @@
                             </form>    
                         </div>    
                     @endauth
-                    <div class="comentarios">
-                        
-                    </div>   
+                    @foreach ($comments as $comment)
+                        @if ($post->id == $comment->post_id)
+                        <div class="comentarios">
+                            <div class="container">
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <img src="/storage/{{ $comment->userComment->avatar }}" alt="comment-user-avatar">
+                                    </div>
+                                    <div class="col-10">
+                                        @if ($comment->userComment->user_name)
+                                            <p>{{ $comment->userComment->user_name }}</p>
+                                        @else
+                                            <p>{{ $comment->userComment->name }}</p>
+                                        @endif
+                                    </div>
+                                    <div class="col-12">
+                                        <p>{{ $comment->comments }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    @endforeach   
                 </div>
             @empty
                 <em>¡SE EL PRIMERO EN CONTAR TU EXPERIENCIA EN VIAGGIO!</em>
@@ -177,7 +197,7 @@
             align-items: center;
         }
 
-        .user-avatar img {
+        .user-avatar img, img[alt=comment-user-avatar] {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -287,6 +307,22 @@
             color: antiquewhite;
             background-color: #4b7bec;
             cursor: pointer;
+        }
+
+        .comentarios {
+            background-color: #dff9fb;
+            border-radius: 15px;
+            color: black;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            width: 70%;
+            position: relative;
+            left: 20px;
+        }
+
+        .comentarios p {
+            display: inline-block;
+            padding-top: 10px;
         }
     </style>
 @endsection

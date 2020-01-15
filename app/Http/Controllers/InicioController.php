@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use Auth;
+use App\Comment;
 
 class InicioController extends Controller
 {
@@ -12,14 +13,10 @@ class InicioController extends Controller
     public function init() {
 
         $posts = Post::all();
-        $vac = compact('posts');
+        $comments = Comment::all();
+        $vac = compact('posts', 'comments');
 
         return view('inicio', $vac);
     } 
-    
-    public function displayComments() {
-        $comments = Comment::all();
-        return view('inicio', compact('comments'));
-    }
 
 }

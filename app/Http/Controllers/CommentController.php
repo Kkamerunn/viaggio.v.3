@@ -24,4 +24,5 @@ class CommentController extends Controller
             return redirect("/login");
         }
     }
+
 }
