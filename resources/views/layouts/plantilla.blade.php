@@ -20,6 +20,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -34,6 +35,9 @@
 
         body {
             height: inherit;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            font-weight: bold;
         }
 
         header {

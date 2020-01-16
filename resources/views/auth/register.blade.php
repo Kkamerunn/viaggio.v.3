@@ -233,7 +233,6 @@
 
     form {
         background-color: inherit;
-        font-weight: bold;
         color: black;
     }
 
