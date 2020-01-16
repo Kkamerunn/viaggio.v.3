@@ -12,20 +12,28 @@ class PostController extends Controller
 
         $userlog = Auth::user();
 
-
         if ($userlog) {
             $post = new Post();
 
-            $path = $req->file("post-image")->store("public");
-            $nombreArchivo = basename($path);
+            if ($req->file("post-image")) {
+                $path = $req->file("post-image")->store("public");
+                $nombreArchivo = basename($path);
 
-            $post->content = $req["post-content"];
-            $post->image = $nombreArchivo;
-            $post->user_id = $userlog->id;
+                $post->content = $req["post-content"];
+                $post->image = $nombreArchivo;
+                $post->user_id = $userlog->id;
 
-            $post->save();
+                $post->save();
 
-            return redirect("/inicio");    
+                return redirect("/inicio");       
+            } else {
+                $post->content = $req["post-content"];
+                $post->user_id = $userlog->id;
+
+                $post->save();
+
+                return redirect("/inicio"); 
+            }
         } else {
             return redirect("/login");
         }
