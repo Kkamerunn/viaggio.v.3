@@ -110,6 +110,9 @@
                     <form action="/personas_seguidas" method="POST">
                         @csrf
                         <input type="hidden" name="persona" value="{{ $post->user_id }}">
+                        <input type="hidden" name="name-persona" value="{{ $post->postUser->name }}">
+                        <input type="hidden" name="user-name-persona" value="{{ $post->postUser->user_name }}">
+                        <input type="hidden" name="avatar-persona" value="{{ $post->postUser->avatar }}">
                         <button type="submit" class="">Seguir</button>
                     </form>    
                 </div>

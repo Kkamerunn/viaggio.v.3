@@ -20,6 +20,9 @@ class FollowerController extends Controller
             if ($followerTab == null) {
                 $follower = new Follower();
                 $follower->followed_id = $req["persona"]; 
+                $follower->followed_name = $req["name-persona"];
+                $follower->followed_user_name = $req["user-name-persona"];
+                $follower->followed_avatar =$req["avatar-persona"];
                 $follower->follower_id = $userLogId;
                 $follower->save();
 
@@ -34,6 +37,9 @@ class FollowerController extends Controller
                 }
                 $follower = new Follower();
                 $follower->followed_id = $req["persona"]; 
+                $follower->followed_name = $req["name-persona"];
+                $follower->followed_user_name = $req["user-name-persona"];
+                $follower->followed_avatar =$req["avatar-persona"];
                 $follower->follower_id = $userLogId;
                 $follower->save();
 
@@ -51,7 +57,8 @@ class FollowerController extends Controller
         $userLog = Auth::user();
         $userLogId = $userLog->id;
 
-        $followers = collect(Follower::where('follower_id', $userLogId)->get()); 
+        //$followers = Follower::all();
+        $followers = Follower::where('follower_id', $userLogId)->get()->toArray(); 
 
         $vac = compact('followers');
 
