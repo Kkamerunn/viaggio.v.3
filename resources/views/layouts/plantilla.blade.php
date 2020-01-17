@@ -7,6 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Icon -->
+    <link rel="shortcut icon" href="/storage/viaggio.png">
+
     <title>
         @yield('title')
     </title>
@@ -17,40 +20,131 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/d9e6b5e683.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="d-flex flex-column">
-        <header class="mb-4 sticky-top">
-            @yield('header')    
-        </header>
-        <main class="mb-2 overflow-auto">
-            @yield('content')    
-        </main>    
-        <footer class="bg-success">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        &copy;copy rights viaggio 2020
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+
     <style>
-        footer {
-            height: 75px;
+        html {
+            height: auto;
         }
 
-        footer .col-12 {
-            top: 25px;
+        body {
+            height: inherit;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            font-weight: bold;
+        }
+
+        header {
+            height: inherit;
+        }
+
+        main {
+            height: inherit;
+        }
+
+        footer {
+            height: inherit;
+            background-color: white;
+            color: #d1d8e0;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            opacity: 1;
+        }
+
+        footer i {
+            color: #badc58;
+            font-size: 25px;
+        }
+
+        footer .nav-link {
+            color: black;
+        }
+
+        img[alt=logo] {
+            height: 100%;
+            width: 300px;
         }
     </style>
-    <script src="{{ asset('/js/lucas.js') }}"></script>
+</head>
+<body>
+    <header class="sticky-top">
+        @yield('header')    
+    </header>
+    <main class="">
+        @yield('content')    
+    </main>    
+    <footer>
+        <div class="d-flex justify-content-center pt-5">
+            <div class="container">
+                <!-- Bienvenida -->
+                <div class="col-7 mx-auto">
+                    <div class="row justify-content-center">
+                        <div class="col-7">
+                            <img src="/storage/viaggio-gris.png" alt="logo">
+                        </div>
+                        <div class="col-7">
+                            <p>Al suscribirte se te abre un mundo de posibilidades para conocer loque hacen otras personas cuando viajan y llenarte de ideas para tu proximo viaje</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ayuda -->
+                <div class="col-7 mx-auto">
+                    <div class="row justify-content-center">
+                        <ul class="navbar-nav d-flex flex-row">
+                            @auth
+                                <li class="nav-item px-2">
+                                    <a href="/inicio" class="nav-link">INICIO</a>
+                                </li>
+                            @endauth    
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link">AYUDA</a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link">CONTACTO</a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="/faq" class="nav-link">FAQS</a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link">TERMINOS Y CONDICIONES</a>
+                            </li>
+                        </ul>
+                    </div> 
+                </div> 
+                <!-- Copy rights -->
+                <div class="col-7 mx-auto">
+                    <div class="row justify-content-center">
+                        <div class="col-7">
+                            &copy;2020. All rights reserved 
+                        </div>
+                    </div>
+                </div>
+                <!-- Icons -->
+                <div class="col-7 mx-auto">
+                    <div class="row justify-content-center">
+                        <ul class="navbar-nav d-flex flex-row">
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link"><i class="fab fa-facebook-square"></i></a>
+                            </li>
+                            <li class="nav-item px-2">
+                                <a href="" class="nav-link"><i class="fab fa-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

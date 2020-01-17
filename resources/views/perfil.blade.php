@@ -5,100 +5,228 @@
 @endsection
 
 @section('header')
-<nav class="navbar navbar-expand-lg navbar-light bg-success" style="background-color: #00F149">
-            
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Notificaciones</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/inicio">Inicio</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-mountain"></i> 
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/settings">Settings</a>
-                    <a class="dropdown-item" href="/faq">FAQ</a>
-                    <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                </div>
-            </li>
-        </ul>
+    <div class="row pt-3 align-items-center">
+        <div class="col-12 col-sm-4 text-center">
+            <ul class="navbar-nav ml-auto d-inline-flex flex-row">
+            @auth
+                <li class="nav-item">
+                    <a href="/inicio" class="nav-link px-2">INICIO</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/faq" class="nav-link px-2">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contacto" class="nav-link px-2">CONTACTO</a>
+                </li> 
+            @endauth
+            @guest
+                <li class="nav-item">
+                    <a href="/faq" class="nav-link px-2">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contacto" class="nav-link px-2">CONTACTO</a>
+                </li>  
+            @endguest
+            </ul>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="row justify-content-center">
+                <img src="/storage/viaggio.png" alt="viaggio" class="align-middle">
+            </div>
+        </div>
+        <div class="col-12 col-sm-4 text-center">
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}"><i class="far fa-user-circle"></i>INICIAR SESION</a>
+                    </li>
+                @endguest
+            </ul>
+        </div>
     </div>
-</nav>
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-4">
+    <div class="container-fluid px-0" id="main-container">
+        <div class="row" style="height: 100%;">
+            <div class="col-4" id="aside">
                 <aside class="container-fluid">
                     <div class="row">
-                        <div class="col-12 img bg-success border-primary">
-                            <img src="/storage/{{ $userLog->avatar }}" alt="avatar" class="my-1">
+                        <div class="col-12 img">
+                            @if ($userLog->avatar)
+                                <img src="/storage/{{ $userLog->avatar }}" alt="avatar" class="my-1">
+                            @else 
+                                <img src="/storage/avatar.png" alt="avatar" class="my-1">
+                            @endif
                         </div>
-                        <div class="col-12 links bg-success">
+                        <div class="col-12 links d-flex align-items-center" style="height: 60%;">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                  <a class="nav-link text-dark" href="/seguidores">Seguidores</a>
+                                  <a class="nav-link" href="#">Seguidores</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" href="/personas_seguidas">Personas que sigues</a>
+                                    <a class="nav-link" href="#">Personas que sigues</a>
                                   </li>
                                 <li class="nav-item">
-                                  <a class="nav-link text-dark" href="/editar">Editar</a>
+                                  <a class="nav-link" href="/editar">Editar</a>
                                 </li>
                               </ul>
                         </div>
                     </div>
                 </aside>
             </div>
-            <div class="col-8">
+            <div class="col-8 overflow-auto pt-5">
                 <div class="row">
-                    <p class="h2">Tus posteos</p>
+                    <div id="tit" class="mx-auto">
+                        <p class="h2">MIS POSTEOS</p>   
+                    </div>
                 </div>
+                <hr>
                 <div class="row">
-                    <div class="col">
+                    <!--<div class="col">-->
                         @foreach ($posts as $post)
                             @if ($post->user_id == $userLog->id)
                                 <div class="container-fluid my-2">
-                                    <div class="row my-3">
-                                        <div class="col-8 w-100 m-0" id="post-container">
-                                            {{ $post->content }}
+                                    <div class="row justify-content-center">
+                                        <div class="post-container col-10">
+                                            <div class="item1 my-2">
+                                                <div class="item1-avatar">
+                                                    <img src="/storage/{{ $post->postUser->avatar }}" alt="avatar">
+                                                </div>
+                                                @if ($post->postUser->user_name)
+                                                    <div class="item1-username ml-2">
+                                                        {{ $post->postUser->user_name }}  
+                                                    </div>
+                                                @else
+                                                    <div class="item1-username ml-2">
+                                                        {{ $post->postUser->name }}  
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="item2 my-2">
+                                                {{ $post->content }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>       
                             @endif    
                         @endforeach
-                    </div>
+                    <!--</div>-->
                 </div>
             </div>
         </div>
     </div>
 
     <style>
+
+        header {
+            background-color: white;
+            box-shadow:  0px 10px 10px grey;
+            height: 140px !important;
+            width: 100%;
+        }
+
+        header a {
+        color: black;
+        }
+
+        header i {
+            color: #badc58;
+            font-size: 25px;
+            margin-right: 8px;
+        }
+
+        img[alt=viaggio] {
+            height: 80px;
+            width: 270px;
+        }
+
+
         aside {
-            height: 100%;
+            height: 70%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding-left: 0;
+        }
+
+        aside a {
+            color: white;
+        }
+
+        aside a:hover {
+            color: #90c74c;   
         }
 
         aside img {
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
+            width: 115px;
             margin: 0 auto;
             display: block;
+            height: 70%;
+            position: relative;
+            top: 20px;
+            border: 1px solid white;
+            box-shadow: 0px 10px 10px grey;
+        }
+        
+        aside .row {
+            height: 100%;
+        }
+
+        main {
+            background-color: #4b7bec;
+        }
+
+        #main-container {
+            padding-bottom: 3px;
+            background-image: url("/storage/misposteos_img.png");
+            width: 100%;
+            height: auto;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative !important;
+            background-color: #fafbfc;
+        }
+
+        .h2 {
+            color: #90c74c;
+        }
+
+        #tit {
+            width: 220px;
+            height: 50px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .post-container {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            height: auto;
+            background-color: white;
+            box-shadow:  0px 10px 10px grey;
+        }
+
+        .item1 {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .item1-avatar img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border: 1px solid white;
+            box-shadow: 0px 10px 10px grey;
         }
     </style>
 @endsection

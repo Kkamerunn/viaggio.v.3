@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.register');
 });
 
 Auth::routes();
@@ -40,3 +40,6 @@ Route::post('/personas_seguidas', 'FollowerController@follow');
 Route::get('/seguidores', 'FollowerController@followers');
 
 
+Route::get('/editar', 'EditarController@index')->name('editar');
+
+Route::put('/editar/{id}', 'EditarController@editar')->name('editar');
