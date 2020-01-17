@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// HOME/INICIO/PERFIL
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/inicio', 'InicioController@init')->name('inicio');
@@ -25,20 +27,25 @@ Route::post('/inicio', 'PostController@uploadPost');
 
 Route::get('/perfil', 'PerfilController@show');
 
+// ELIMINAR SETTINGS
+
 Route::get('/settings', function() {
     return view('settings');
 });
 
+// FAQ´S
+
 Route::get('/faq', function() {
     return view('faq');
 });
+
+// EN PERFIL: SEGUIDORES Y PERSONAS SEGUIDAS + EDICION DE DATOS PERSONALES
 
 Route::get('/personas_seguidas', 'FollowerController@following');
 
 Route::post('/personas_seguidas', 'FollowerController@follow');
 
 Route::get('/seguidores', 'FollowerController@followers');
-
 
 Route::get('/editar', 'EditarController@index')->name('editar');
 

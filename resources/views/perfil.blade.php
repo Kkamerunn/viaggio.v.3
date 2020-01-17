@@ -38,6 +38,19 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                        <i class="far fa-user-circle"></i>
+                        CERRAR SESION
+                    </a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>   
+                @endauth
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}"><i class="far fa-user-circle"></i>INICIAR SESION</a>
@@ -64,10 +77,10 @@
                         <div class="col-12 links d-flex align-items-center" style="height: 60%;">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                  <a class="nav-link" href="#">Seguidores</a>
+                                  <a class="nav-link" href="/seguidores">Seguidores</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Personas que sigues</a>
+                                    <a class="nav-link" href="/personas_seguidas">Personas que sigues</a>
                                   </li>
                                 <li class="nav-item">
                                   <a class="nav-link" href="/editar">Editar</a>
@@ -142,7 +155,6 @@
             height: 80px;
             width: 270px;
         }
-
 
         aside {
             height: 70%;

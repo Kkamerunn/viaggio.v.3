@@ -37,17 +37,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Relacion con posts
+    // Relacion con posts -> uno a muchos
 
     public function myPost() {
         return $this->hasMany("App\Post", "user_id");
     }
 
-    // Relacion con followers
+    // Relacion con followers -> muchos a muchos
+     
 
-    public function follower() {
-        return $this->hasMany("App\Follower", "follower_id");
+    public function followers() {
+        return $this->belongsToMany("App\User", "followers", "followed_id", "follower_id");
     }
 
+    public function followed() {
+        return $this->belongsToMany("App\User", "followers", "follower_id", "followed_id");
+    }
 
 }
