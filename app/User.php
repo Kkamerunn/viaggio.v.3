@@ -45,13 +45,20 @@ class User extends Authenticatable
 
     // Relacion con followers -> muchos a muchos
      
-
     public function followers() {
         return $this->belongsToMany("App\User", "followers", "followed_id", "follower_id");
     }
 
     public function followed() {
         return $this->belongsToMany("App\User", "followers", "follower_id", "followed_id");
+    }
+    
+    public function myComment() {
+        return $this->hasMany("App\Comment", "user_id");
+    }
+
+    public function myResponse() {
+        return $this->hasMany("App\Response", "user_id");
     }
 
 }

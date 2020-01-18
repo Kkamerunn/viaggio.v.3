@@ -74,7 +74,7 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <button type="submit">
+                        <button type="submit" id="submit-post">
                             <i class='far fa-paper-plane'></i> 
                         </button>
                     </div>
@@ -83,8 +83,9 @@
         </div>
         <hr>
         <div class="row overflow-auto">
+            <!-- Posts -->
             @forelse ($posts as $post)
-                <div class="post-container col-11 w-100 mx-auto my-2">
+                <div class="post-container col-7 w-100 mx-auto my-2">
                     <div class="post-user-identifier pt-2">
                         <div class="user-avatar">
                             <img src="/storage/{{ $post->postUser->avatar }}" alt="image">
@@ -113,7 +114,102 @@
                                 <img src="/storage/{{ $post->image }}" alt="Post image" class="img-fluid rounded">
                             </div>
                         @endif
-                    </div>    
+                    </div> 
+                    @guest
+                        <div class="comentar" disabled>Comentar</div>  
+                    @endguest
+                    @auth
+                        <div class="commentDiv">
+                            <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                            <button class="comentar"><i class="fas fa-comment"></i>Comentar</button>
+                            <form action="/comments" method="POST" enctype="multipart/form-data" class="comments-form">
+                            @csrf    
+                                <input type="text" name="comment-content" class="comment-content" placeholder="comenta..." maxlenght="500">
+                                <input type="hidden" name="post-comment-id" value="{{ $post->id }}">
+                                <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
+                            </form>    
+                        </div>    
+                    @endauth
+                    <!-- Comentarios -->
+                    @foreach ($comments as $comment)
+                        @if ($post->id == $comment->post_id)
+                        <div class="comentarios">
+                            <div class="container">
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <img src="/storage/{{ $comment->userComment->avatar }}" alt="comment-user-avatar">
+                                    </div>
+                                    <div class="col-10">
+                                        @if ($comment->userComment->user_name)
+                                            <p>{{ $comment->userComment->user_name }}</p>
+                                        @else
+                                            <p>{{ $comment->userComment->name }}</p>
+                                        @endif
+                                    </div>
+                                    <div class="col-12">
+                                        <p>{{ $comment->comments }}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                @guest
+                                    <div class="comentar" disabled>Responder</div>  
+                                @endguest
+                                @auth
+                                    <div class="commentDiv">
+                                        <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                        <button class="responder"><i class="fas fa-comment"></i>Responder</button>
+                                        <form action="/responses" method="POST" enctype="multipart/form-data" class="comments-form mb-2">
+                                        @csrf    
+                                            <input type="text" name="response-content" class="comment-content" maxlenght="400">
+                                            <input type="hidden" name="comment-response-id" value="{{ $comment->id }}">
+                                            <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
+                                        </form>    
+                                    </div>    
+                                @endauth
+                            </div>
+                        </div>
+                        <!-- Respuestas de comentarios -->
+                            @foreach ($responses as $response)
+                                @if ($comment->id == $response->comment_id)
+                                    <div class="comentarios">
+                                        <div class="container">
+                                            <div class="row mt-3">
+                                                <div class="col-2">
+                                                    <img src="/storage/{{ $response->responseUser->avatar }}" alt="comment-user-avatar">
+                                                </div>
+                                                <div class="col-10">
+                                                    @if ($response->responseUser->user_name)
+                                                        <p>{{ $response->responseUser->user_name }}</p>
+                                                    @else
+                                                        <p>{{ $response->responseUser->name }}</p>
+                                                    @endif
+                                                </div>
+                                                <div class="col-12">
+                                                    <p>{{ $response->responses }}</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            @guest
+                                                <div class="comentar" disabled>Responder</div>  
+                                            @endguest
+                                            @auth
+                                                <div class="commentDiv">
+                                                    <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                                    <button class="comentar"><i class="fas fa-comment"></i>Responder</button>
+                                                    <form action="/responses" method="POST" enctype="multipart/form-data" class="responses-form mb-2">
+                                                    @csrf    
+                                                        <input type="text" name="response-content" class="comment-content" maxlenght="400">
+                                                        <input type="hidden" name="comment-response-id" value="{{ $comment->id }}">
+                                                        <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
+                                                    </form>    
+                                                </div>    
+                                            @endauth
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
+                    @endforeach   
                 </div>
             @empty
                 <em>¡SE EL PRIMERO EN CONTAR TU EXPERIENCIA EN VIAGGIO!</em>
@@ -164,13 +260,12 @@
             align-items: center;
         }
 
-        .user-avatar img {
+        .user-avatar img, img[alt=comment-user-avatar] {
             width: 50px;
             height: 50px;
             border-radius: 50%;
         }
 
-        
         .user-name-identifier {
             margin-left: 10px;
         }
@@ -200,7 +295,7 @@
             align-items: center; 
         }
 
-        button[type=submit] {
+        #submit-post {
             background-color: #4b7bec;
             border: 0;
             transition: background-color 1s;
@@ -210,6 +305,82 @@
 
         button[type=submit]:active {
             background-color: aquamarine;
+        }
+
+        .comments-form {
+            display: none;
+        }
+
+        .comentar, .responder {
+            background-color: #45aaf2;
+            font-weight: bold;
+            border: none;
+            color: aliceblue;
+            border-radius: 15px;
+            margin-bottom: 4px;
+            transition: background-color 0.5s;
+        }
+
+        .likes {
+            background-color: #45aaf2;
+            font-weight: bold;
+            border: none;
+            color: aliceblue;
+            border-radius: 15px;
+            margin-bottom: 4px;
+            transition: background-color 0.5s;
+        }
+
+        .fa-comment {
+            padding-right: 3px;
+        }
+
+        .fa-thumbs-up {
+            padding-right: 3px;
+        }
+
+        .comentar:hover, .responder:hover, .likes:hover {
+            background-color: aquamarine;
+            cursor: pointer;
+        }
+
+        .comment-content {
+            height: auto;
+            width: 90%;
+            background-color: #dfe6e9;
+            border: none;
+            border-radius: 15px;
+            padding: 7px 10px;
+        }
+
+        .submit-comment {
+            background-color: #45aaf2;
+            /*color: #8854d0;*/
+            border: none;
+            border-radius: 50%;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .submit-comment:hover {
+            color: antiquewhite;
+            background-color: #4b7bec;
+            cursor: pointer;
+        }
+
+        .comentarios {
+            background-color: #dff9fb;
+            border-radius: 15px;
+            color: black;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            width: 70%;
+            position: relative;
+            left: 20px;
+        }
+
+        .comentarios p {
+            display: inline-block;
+            padding-top: 10px;
         }
     </style>
 @endsection
