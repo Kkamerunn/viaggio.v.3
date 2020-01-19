@@ -58,7 +58,3 @@ Route::get('/terminos_y_condiciones', function() {
 Route::get('/contacto', function() {
     return view('contacto');
 });
-
-Route::get('/ayuda', function() {
-    return view('ayuda');
-});

@@ -1,5 +1,9 @@
 @extends('layouts.plantilla')
 
+@section('title')
+    Contacto
+@endsection
+
 @section('header')
     <div class="row pt-3 align-items-center">
         <div class="col-12 col-sm-4 text-center">
@@ -59,5 +63,31 @@
 @endsection
 
 @section('content')
-
+    <div class="container my-5">
+        <div class="row justify-content-center contacto">
+            <div class="col-12 col-sm-7 mt-2">
+                <h3>Dirección: </h3>
+                <hr>
+                <p>Localidad: Acassuso</p>
+                <p>Provincia de Buenos Aires</p>
+                <p>Calle: General Justo José de Urquiza</p>
+                <p>Altura: 241</p>
+                <p>Piso: 3</p>
+                <p>Oficina: 1</p>
+                <p>Referencias: entre calles Manzone y Arenales</p>
+                <p>Horarios: Lun a Vie de 8am a 12pm y de 13pm a 18pm</p>
+            </div>
+            <div class="col-12 col-sm-7 my-5">
+                <h3>Telefonos de contacto: </h3>
+                <hr>
+                <p>Movil: +54 9 11 6416 3312</p>
+                <p>Fijo: +54 9 11 5243 1843</p>
+            </div>
+            <div class="col-12 col-sm-7">
+                <h3>Email: </h3>
+                <hr>
+                <p>info@viaggio.com.ar</p>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -106,16 +106,13 @@
                                 </li>
                             @endauth    
                             <li class="nav-item px-2">
-                                <a href="" class="nav-link">AYUDA</a>
-                            </li>
-                            <li class="nav-item px-2">
-                                <a href="" class="nav-link">CONTACTO</a>
+                                <a href="/contacto" class="nav-link">CONTACTO</a>
                             </li>
                             <li class="nav-item px-2">
                                 <a href="/faq" class="nav-link">FAQS</a>
                             </li>
                             <li class="nav-item px-2">
-                                <a href="" class="nav-link">TERMINOS Y CONDICIONES</a>
+                                <a href="/terminos_y_condiciones" class="nav-link">TERMINOS Y CONDICIONES</a>
                             </li>
                         </ul>
                     </div> 

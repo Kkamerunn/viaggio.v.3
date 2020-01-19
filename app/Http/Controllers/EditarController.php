@@ -15,6 +15,22 @@ class EditarController extends Controller
     }
 
     public function editar(Request $req, $id) {
+        
+        $reglas = [
+            "new-user-name" => "string|min:3|max:12",
+            "new-avatar" => "mimes:jpeg,png,gif,svg",
+            "new-pass" => "string|min:8"
+        ];
+
+        $mensajes = [
+            "string" => "Este campo debe ser un texto",
+            "min" => "El campo :attribute debe tener al menos :min caracteres",
+            "max" => "El campo :attribute debe tener al menos :max caracteres",
+            "mimes" => "El campo :attribute solo acepta imagenes de tipo :mimes"
+        ];
+        
+        $this->validate($req, $reglas, $mensajes);
+        
         $user = User::find($id);
 
         $path = $req->file("new-avatar")->store("public");

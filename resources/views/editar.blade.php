@@ -10,7 +10,7 @@
             <ul class="navbar-nav ml-auto d-inline-flex flex-row">
             @auth
                 <li class="nav-item">
-                    <a href="/inicio" class="nav-link px-2">INICIO</a>
+                    <a href="/perfil/{{ Auth::user()->id }}" class="nav-link px-2">PERFIL</a>
                 </li>
                 <li class="nav-item">
                     <a href="/faq" class="nav-link px-2">FAQ</a>
@@ -69,19 +69,28 @@
                         <label for="new-user-name" class="col-12 col-sm-3 col-form-label">Nuevo nombre de usuario</label>
                         <div class="col-12 col-sm-9">
                             <input type="text" class="form-control" name="new-user-name" id="new-user-name">
-                        </div>  
+                        </div> 
+                        @error('new-user-name') 
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group row">
                         <label for="new-avatar" class="col-12 col-sm-3 col-form-label">Nuevo avatar</label>
                         <div class="col-12 col-sm-9">
                             <input type="file" class="form-control" name="new-avatar" id="new-avatar">
                         </div>
+                        @error('new-avatar') 
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group row">
                         <label for="new-pass" class="col-12 col-sm-3 col-form-label">Nueva clave</label>
                         <div class="col-12 col-sm-9">
                             <input type="password" class="form-control" name="new-pass" id="new-pass">  
                         </div>
+                        @error('new-pass') 
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn">Guardar cambios</button>
