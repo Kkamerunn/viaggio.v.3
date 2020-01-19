@@ -67,28 +67,7 @@
     @endforeach
 
     <style>
-        header {
-            background-color: white;
-            box-shadow:  0px 10px 10px grey;
-            height: 140px !important;
-            width: 100%;
-        }
-    
-        header a {
-            color: black;
-        }
-    
-        header i {
-            color: #badc58;
-            font-size: 25px;
-            margin-right: 8px;
-        }
-    
-        img[alt=viaggio] {
-            height: 80px;
-            width: 270px;
-        }
-    
+      
     </style>
 @endsection
 

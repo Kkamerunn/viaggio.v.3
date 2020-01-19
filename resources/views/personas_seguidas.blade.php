@@ -10,7 +10,7 @@
             <ul class="navbar-nav ml-auto d-inline-flex flex-row">
             @auth
                 <li class="nav-item">
-                    <a href="/perfil" class="nav-link px-2">PERFIL</a>
+                    <a href="/perfil/{{ Auth::user()->id }}" class="nav-link px-2">PERFIL</a>
                 </li>
                 <li class="nav-item">
                     <a href="/faq" class="nav-link px-2">FAQ</a>
@@ -61,27 +61,24 @@
     </div>
 @endsection
 
-<!--Arreglar este código para que se vea-->
-
 @section('content')
     <div class="container px-auto py-5">
         <h1>Estas siguiendo a:</h1><br><hr>
         @foreach ($userLog->followed as $item)
             <div class='container pt-2'>
                 <div class='row'>
-                    <div class='col-12 col-sm-8 mx-auto'>
+                    <div class='col-12 col-sm-6 mx-auto follower-container'>
                         <ul>
                             @if ($item->user_name)
                                 <li>
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 col-sm-6 fo">
-                                                <div class="d-flex flex-row">
+                                                <div class="d-flex flex-row align-items-center mt-3">
                                                     <img src="/storage/{{ $item->avatar }}" alt="avatar" class="follower-img">
-                                                    <div class="follower-name" onclick="followerPersonalSpace()">
-                                                        {{ $item->user_name }}
+                                                    <div class="follower-name">
+                                                        <a href="/perfil/{{ $item->id }}" class="perfil-anchor">{{ $item->user_name }}</a>
                                                     </div>
-                                                    <a href="{{ '/perfil' . '/' . $item->id }}" style="display: none;"></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,10 +89,10 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12 col-sm-6 fo">
-                                                <div class="d-flex flex-row">
+                                                <div class="d-flex flex-row  align-items-center mt-3">
                                                     <img src="/storage/{{ $item->avatar }}" alt="avatar" class="follower-img">
                                                     <div class="follower-name">
-                                                        {{ $item->name }}
+                                                        <a href="/perfil/{{ $item->id }}" class="perfil-anchor">{{ $item->name }}</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,41 +107,8 @@
         @endforeach
     </div>
     <style>
-        header {
-            background-color: white;
-            box-shadow:  0px 10px 10px grey;
-            height: 140px !important;
-            width: 100%;
-        }
-
-        header a {
-        color: black;
-        }
-
-        header i {
-            color: #badc58;
-            font-size: 25px;
-            margin-right: 8px;
-        }
-
-        img[alt=viaggio] {
-            height: 80px;
-            width: 270px;
-        }
-
-
         li {
             list-style: none;
-        }
-
-        .follower-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-        }
-
-        .follower-name {
-
         }
     </style>
     <script src="{{ asset('/js/main.js') }}"></script>

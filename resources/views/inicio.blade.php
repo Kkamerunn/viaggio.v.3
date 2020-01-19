@@ -10,7 +10,7 @@
             <ul class="navbar-nav ml-auto d-inline-flex flex-row">
             @auth
                 <li class="nav-item">
-                    <a href="/perfil" class="nav-link px-2">PERFIL</a>
+                    <a href="/perfil/{{ Auth::user()->id }}" class="nav-link px-2">PERFIL</a>
                 </li>
                 <li class="nav-item">
                     <a href="/faq" class="nav-link px-2">FAQ</a>
@@ -275,29 +275,6 @@
     </div>
     <script src="{{ asset('/js/inicio.js') }}"></script>
     <style>
-
-        header {
-            background-color: white;
-            box-shadow:  0px 10px 10px grey;
-            height: 140px !important;
-            width: 100%;
-        }
-
-        header a {
-            color: black;
-        }
-
-        header i {
-            color: #badc58;
-            font-size: 25px;
-            margin-right: 8px;
-        }
-
-        img[alt=viaggio] {
-            height: 80px;
-            width: 270px;
-        }
-
         #user-info-square {
             background-image: url('/storage/2-forest.jpg');
             background-repeat: no-repeat;            

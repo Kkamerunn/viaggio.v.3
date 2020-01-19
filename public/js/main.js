@@ -1,9 +1,17 @@
 // Selectors
 
-let followerName = document.querySelectorAll("follower-name");
+let followerName = document.querySelectorAll("follower-name"),
+
+    perfilAnchor = document.querySelectorAll("perfil-anchor");
 
 // Functions
 
-function followerPersonalSpace() {
-    followerName.nextElementSibling.click();
+function followerPersonalSpace(event) {
+    event.target.nextElementSibling.click();
+}
+
+// EventListeners
+
+for (item of followerName) {
+    item.addEventListener('click', followerPersonalSpace);
 }

@@ -25,7 +25,7 @@ Route::get('/inicio', 'InicioController@init')->name('inicio');
 
 Route::post('/inicio', 'PostController@uploadPost');
 
-Route::get('/perfil', 'PerfilController@show');
+Route::get('/perfil/{id}', 'PerfilController@show');
 
 // ELIMINAR SETTINGS
 

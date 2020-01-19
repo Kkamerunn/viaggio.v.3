@@ -9,22 +9,15 @@ use App\User;
 
 class PerfilController extends Controller
 {
-    public function show() {
+    public function show($id) {
 
-        $userLog = Auth::user();   
+        $userLog = User::find($id);   
 
-        $posts = Post::all();
+        $posts = Post::where('user_id', $id)->get();
 
         $vac = compact('posts', 'userLog');
 
         return view('perfil', $vac);
     }
 
-    /*
-    public function follow() {
-        
-        $userLog = Auth::user();
-
-
-    }*/
 }

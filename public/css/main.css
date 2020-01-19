@@ -1,0 +1,56 @@
+header {
+    background-color: white;
+    box-shadow:  0px 10px 10px grey;
+    height: 140px !important;
+    width: 100%;
+}
+
+header a {
+    color: black;
+}
+
+header i {
+    color: #badc58;
+    font-size: 25px;
+    margin-right: 8px;
+}
+
+img[alt=viaggio] {
+    height: 80px;
+    width: 270px;
+}
+
+.follower-container {
+    background-color: white;
+    box-shadow: 0px 10px 10px grey;
+    margin-bottom: 10px;
+    transition: background-color .4s;
+}
+
+.perfil-anchor {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.perfil-anchor:hover {
+    text-decoration: none;
+    color: #badc58;
+}
+
+.follower-container:hover {
+    cursor: pointer;
+    background-color: #8395a7;
+    color: white;
+}
+
+.follower-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0px 10px 10px grey;
+}
+
+.follower-name {
+    margin-left: 15px;
+}
