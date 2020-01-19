@@ -13,11 +13,8 @@
                     <a href="/perfil" class="nav-link px-2">PERFIL</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/faq" class="nav-link px-2">FAQ</a>
+                    <a href="/inicio" class="nav-link px-2">INICIO</a>
                 </li>
-                <li class="nav-item">
-                    <a href="/contacto" class="nav-link px-2">CONTACTO</a>
-                </li> 
             @endauth
             @guest
                 <li class="nav-item">
@@ -62,12 +59,58 @@
 @endsection
     
 @section('content')
-    @foreach ($userLog->followers as $item)
-        <p>{{ $item->name }}</p><br>
-    @endforeach
-
+    <ul>
+        @foreach ($userLog->followers as $item)
+            <li>
+                <div class="container seguidores">
+                    <div class="row mx-auto justify-content-center my-5 seguidores-content">
+                        <div class="avatar-seguidor col-5 align-self-center">
+                            <img src="{{ $item->avatar }}" alt="avatar" class="img-fluid">
+                        </div>
+                        <div class="nombre-seguidor col-5 align-self-center">
+                            @if ($item->user_name)
+                                <a href="/perfil/{{ $item->id }}">{{ $item->user_name }}</a>
+                            @else 
+                                <a href="/perfil/{{ $item->id }}">{{ $item->name }}</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </li>
+        @endforeach
+    </ul>
     <style>
-      
+      ul {
+        list-style: none;   
+      }
+
+      li, .seguidores {
+        height: auto;
+      }
+
+      .seguidores-content {
+        width: 50%;  
+        height: auto;
+        background-color: white;
+        box-shadow: 0px 10px 10px grey;
+      }
+
+      .avatar-seguidor {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          box-shadow: 0px 10px 10px grey;
+      }
+
+      a {
+          color: black;
+          transition: color .1s;
+      }
+
+      a:hover {
+          text-decoration: none;
+          color: #90c74c;
+      }
     </style>
 @endsection
 

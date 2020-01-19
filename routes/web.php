@@ -27,12 +27,6 @@ Route::post('/inicio', 'PostController@uploadPost');
 
 Route::get('/perfil/{id}', 'PerfilController@show');
 
-// ELIMINAR SETTINGS
-
-Route::get('/settings', function() {
-    return view('settings');
-});
-
 // FAQ´S
 
 Route::get('/faq', function() {
@@ -44,6 +38,8 @@ Route::get('/faq', function() {
 Route::get('/personas_seguidas', 'FollowerController@following');
 
 Route::post('/personas_seguidas', 'FollowerController@follow');
+
+Route::delete('/eliminar/{id}', 'FollowerController@stopFollowing')->name('eliminar');
 
 Route::get('/seguidores', 'FollowerController@followers');
 

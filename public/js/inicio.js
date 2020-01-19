@@ -4,12 +4,6 @@ Selectors
 ---------
 */
 
-var countrySelector = document.getElementById('exampleFormControlSelect1');
-
-var countrySelectorImg = document.querySelector("#image-container [alt='bandera']");
-
-var main = document.getElementById("principal");
-
 var principalTitle = document.querySelector("h2");
 
 var textArea = document.getElementById("post-content");
@@ -77,10 +71,6 @@ function setSelectorImage(url) {
     countrySelectorImg.src = url;
 }
 
-function setBgColor() {
-    main.style.backgroundColor = localStorage.getItem(localStorage.key(0));
-}
-
 function displayCommentInput(event) {
     if (event.target.nextElementSibling.style.display == "none") {
         setTimeout(() => {
@@ -104,6 +94,7 @@ function setInitialAvatarPosition() {
     initialAvatar.style.left = "40px";
 }
 
+
 /*
 ---------------
 Event Listeners
@@ -113,11 +104,6 @@ Event Listeners
 countrySelector.addEventListener('change', event => {
     let flag = flags.find(elem => elem.name === event.target.value);
     setSelectorImage(flag.imgUrl);
-});
-*/
-/*
-window.addEventListener('load', () => {
-    setBgColor();
 });
 */
 

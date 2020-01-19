@@ -79,6 +79,14 @@
                                                     <div class="follower-name">
                                                         <a href="/perfil/{{ $item->id }}" class="perfil-anchor">{{ $item->user_name }}</a>
                                                     </div>
+                                                    <div class="comentar">
+                                                        <form action="{{ route('eliminar', $item->id) }}" method="POST">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <!--<input type="hidden" name="persona" value="">-->
+                                                            <button type="submit" class="comentar"><i class="fas fa-user-plus"></i>Dejar de seguir</button>
+                                                        </form> 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,6 +101,14 @@
                                                     <img src="/storage/{{ $item->avatar }}" alt="avatar" class="follower-img">
                                                     <div class="follower-name">
                                                         <a href="/perfil/{{ $item->id }}" class="perfil-anchor">{{ $item->name }}</a>
+                                                    </div>
+                                                    <div class="comentar">
+                                                        <form action="{{ route('eliminar', $item->id) }}" method="POST">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <!--<input type="hidden" name="persona" value="">-->
+                                                            <button type="submit" class="comentar"><i class="fas fa-user-plus"></i>Dejar de seguir</button>
+                                                        </form> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -111,5 +127,4 @@
             list-style: none;
         }
     </style>
-    <script src="{{ asset('/js/main.js') }}"></script>
 @endsection

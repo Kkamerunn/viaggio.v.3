@@ -56,6 +56,21 @@
                         <a class="nav-link" href="{{ route('login') }}"><i class="far fa-user-circle"></i>INICIAR SESION</a>
                     </li>
                 @endguest
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Dropdown
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                          <button class="dropdown-item" type="button">
+                              <div id="drop-drown-color-div-1"></div>
+                          </button>
+                          <button class="dropdown-item" type="button">
+                              <div id="drop-drown-color-div-2"></div>
+                          </button>
+                        </div>
+                      </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -389,16 +404,6 @@
             display: none;
         }
 
-        .comentar, .responder {
-            background-color: #45aaf2;
-            font-weight: bold;
-            border: none;
-            color: aliceblue;
-            border-radius: 15px;
-            margin-bottom: 4px;
-            transition: background-color 0.5s;
-        }
-
         .likes {
             background-color: #45aaf2;
             font-weight: bold;
@@ -423,11 +428,6 @@
             color: #90c74c;
         }
 
-        .comentar:hover, .responder:hover, .likes:hover {
-            background-color: aquamarine;
-            cursor: pointer;
-        }
-
         .comment-content {
             height: auto;
             width: 90%;
@@ -439,7 +439,6 @@
 
         .submit-comment {
             background-color: #45aaf2;
-            /*color: #8854d0;*/
             border: none;
             border-radius: 50%;
             transition: background-color 0.5s, color 0.5s;
@@ -470,6 +469,19 @@
 
         .resp {
             left: 50px;
+        }
+
+        #drop-drown-color-div-1 {
+            background-color: black;
+            width: 110px;
+            height: 50px;
+        }
+
+        #drop-drown-color-div-2 {
+            background-color: white;
+            width: 110px;
+            height: 50px;
+            border: 1px solid black;
         }
     </style>
 @endsection

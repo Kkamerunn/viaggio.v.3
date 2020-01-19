@@ -51,7 +51,6 @@ class FollowerController extends Controller
         $userLog = Auth::user();
         $userLogId = $userLog->id;
         
-        //$followers = Follower::all();
         $followers = Follower::where('follower_id', $userLogId)->get(); 
 
         $vac = compact('userLog');
@@ -68,6 +67,13 @@ class FollowerController extends Controller
         $vac = compact('userLog');
 
         return view('seguidores', $vac);
+    }
+
+    public function stopFollowing($id) {
+
+        $follower = Follower::where('followed_id', $id)->delete();
+
+        return back();
     }
 
 }

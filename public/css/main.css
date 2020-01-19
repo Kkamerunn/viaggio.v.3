@@ -54,3 +54,18 @@ img[alt=viaggio] {
 .follower-name {
     margin-left: 15px;
 }
+
+.comentar, .responder {
+    background-color: #45aaf2;
+    font-weight: bold;
+    border: none;
+    color: aliceblue;
+    border-radius: 15px;
+    margin-bottom: 4px;
+    transition: background-color 0.5s;
+}
+
+.comentar:hover, .responder:hover, .likes:hover {
+    background-color: aquamarine;
+    cursor: pointer;
+}
