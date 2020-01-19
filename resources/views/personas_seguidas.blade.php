@@ -64,48 +64,51 @@
 <!--Arreglar este código para que se vea-->
 
 @section('content')
-    @foreach ($userLog->followed as $item)
-        <div class='container'>
-            <div class='row'>
-                <div class='col-12 col-sm-8 mx-auto'>
-                    <p>Estas siguiendo a:</p><br>
-                    <ul>
-                        @if ($item->user_name)
-                            <li>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-6 fo">
-                                            <div class="d-flex flex-row">
-                                                <img src="/storage/{{ $item->avatar }}" alt="avatar" class="follower-img">
-                                                <div class="follower-name">
-                                                    {{ $item->user_name }}
+    <div class="container px-auto py-5">
+        <h1>Estas siguiendo a:</h1><br><hr>
+        @foreach ($userLog->followed as $item)
+            <div class='container pt-2'>
+                <div class='row'>
+                    <div class='col-12 col-sm-8 mx-auto'>
+                        <ul>
+                            @if ($item->user_name)
+                                <li>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6 fo">
+                                                <div class="d-flex flex-row">
+                                                    <img src="/storage/{{ $item->avatar }}" alt="avatar" class="follower-img">
+                                                    <div class="follower-name" onclick="followerPersonalSpace()">
+                                                        {{ $item->user_name }}
+                                                    </div>
+                                                    <a href="{{ '/perfil' . '/' . $item->id }}" style="display: none;"></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        @else 
-                            <li>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-6 fo">
-                                            <div class="d-flex flex-row">
-                                                <img src="/storage/{{ $item->avatar }}" alt="avatar" class="follower-img">
-                                                <div class="follower-name">
-                                                    {{ $item->name }}
+                                </li>
+                            @else 
+                                <li>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6 fo">
+                                                <div class="d-flex flex-row">
+                                                    <img src="/storage/{{ $item->avatar }}" alt="avatar" class="follower-img">
+                                                    <div class="follower-name">
+                                                        {{ $item->name }}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endif
-                    </ul>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
     <style>
         header {
             background-color: white;
@@ -144,4 +147,5 @@
 
         }
     </style>
+    <script src="{{ asset('/js/main.js') }}"></script>
 @endsection

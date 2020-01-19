@@ -84,7 +84,7 @@ theme4.onclick = changeBodyBackColor;
 // Prueba
 
 // tit.onclick = () => console.log("esto es una prueba");
-
+/*
 window.addEventListener("load", () => {
     body.style.height = "100vh";
     if (storageAvailable('localStorage')) {
@@ -94,4 +94,4 @@ window.addEventListener("load", () => {
         console.log("LocalStorage no está disponible");
       }
 });
-
+*/

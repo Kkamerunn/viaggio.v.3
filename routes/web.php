@@ -54,3 +54,15 @@ Route::put('/editar/{id}', 'EditarController@editar')->name('editar');
 Route::post('/comments', 'CommentController@uploadComment');
 
 Route::post('/responses', 'ResponseController@uploadReponse');
+
+Route::get('/terminos_y_condiciones', function() {
+    return view('terminos_y_condiciones');
+});
+
+Route::get('/contacto', function() {
+    return view('contacto');
+});
+
+Route::get('/ayuda', function() {
+    return view('ayuda');
+});

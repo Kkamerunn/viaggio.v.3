@@ -10,7 +10,7 @@ var countrySelectorImg = document.querySelector("#image-container [alt='bandera'
 
 var main = document.getElementById("principal");
 
-var textAreaLabel = document.querySelector("[for='post-content']");
+var principalTitle = document.querySelector("h2");
 
 var textArea = document.getElementById("post-content");
 
@@ -30,19 +30,25 @@ var numOfLikes = document.querySelector("sup");
 
 var likes = document.querySelectorAll(".likes");
 
+let initialAvatar = document.getElementById("initial-avatar"),
+
+    userInfoSquare = document.getElementById("user-info-square"),
+    
+    postForm = document.getElementById("post-form");
+
 /*
 ------------
 Default flag
 ------------
-*/
 
 countrySelectorImg.src = '/storage/afghanistan_flag.png';
+*/
 
 /*
 -------------------
 fetch de los paises
 -------------------
-*/
+
 
 var flags = [];
 
@@ -59,6 +65,7 @@ fetch('https://restcountries.eu/rest/v2/all')
     });
 
 var selectorOptions = countrySelector.options;
+*/
 
 /*
 ---------
@@ -91,23 +98,33 @@ function displayLikes(event) {
     event.target.nextElementSibling.innerHTML = ++num; 
 }
 
+function setInitialAvatarPosition() {
+    initialAvatar.style.zIndex = 900;
+    initialAvatar.style.top = "-20px";
+    initialAvatar.style.left = "40px";
+}
+
 /*
 ---------------
 Event Listeners
 ---------------
 */
-
+/*
 countrySelector.addEventListener('change', event => {
     let flag = flags.find(elem => elem.name === event.target.value);
     setSelectorImage(flag.imgUrl);
 });
-
+*/
+/*
 window.addEventListener('load', () => {
     setBgColor();
 });
+*/
 
-textAreaLabel.addEventListener('click', () => {
-    textArea.classList.toggle('textarea');
+window.onload = setInitialAvatarPosition;
+
+principalTitle.addEventListener('click', () => {
+    postForm.classList.toggle('post-form');
 });
 
 for (let i = 0; i < comments.length; i++) {
@@ -121,6 +138,7 @@ for (let i = 0; i < likes.length; i++) {
 for (let i = 0; i < responses.length; i++) {
     responses[i].addEventListener('click', displayCommentInput);
 }
+
 
 
 

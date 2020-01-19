@@ -5,253 +5,347 @@
 @endsection
 
 @section('header')
-    <nav class="navbar navbar-expand-lg" style="background-color: #8854d0">
-            
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Notificaciones</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="/perfil">Perfil</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-mountain"></i> 
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/settings">Themes</a>
-                            <a class="dropdown-item" href="/faq">FAQ</a>
-                            <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                        </div>
-                    </li>
-                </ul>
+    <div class="row pt-3 align-items-center">
+        <div class="col-12 col-sm-4 text-center">
+            <ul class="navbar-nav ml-auto d-inline-flex flex-row">
+            @auth
+                <li class="nav-item">
+                    <a href="/perfil" class="nav-link px-2">PERFIL</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/faq" class="nav-link px-2">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contacto" class="nav-link px-2">CONTACTO</a>
+                </li> 
+            @endauth
+            @guest
+                <li class="nav-item">
+                    <a href="/faq" class="nav-link px-2">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contacto" class="nav-link px-2">CONTACTO</a>
+                </li>  
+            @endguest
+            </ul>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="row justify-content-center">
+                <img src="/storage/viaggio.png" alt="viaggio" class="align-middle">
             </div>
-            <div id="countries-selector" class="float-right">
-                <form action="" method="POST">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1" style="color: #d1d8e0;">Select your country</label>
-                        <div class="container">
-                            <div class="row">
-                                <div id="image-container" class="col-4">
-                                    <img src="" alt="bandera" width="100px">
-                                </div>
-                                <div class="col-4">
-                                    <select class="form-control" id="exampleFormControlSelect1" name="country"></select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-    </nav>
+        </div>
+        <div class="col-12 col-sm-4 text-center">
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                        <i class="far fa-user-circle"></i>
+                        CERRAR SESION
+                    </a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>   
+                @endauth
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}"><i class="far fa-user-circle"></i>INICIAR SESION</a>
+                    </li>
+                @endguest
+            </ul>
+        </div>
+    </div>
 @endsection
 
 @section('content')
-    <div class="container-fluid py-2" id="principal">
-        <div class="row align-items-center">
-            <div class="col-sm-12">
-                <form action="/inicio" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="post-content" class="h2" style="color: #d1d8e0;">Viajaste? cuenta tu experiencia!</label>
-                        <textarea class="form-control textarea" name="post-content" id="post-content" cols="100" rows="7" placeholder="Escribe tu viaje..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <i class="fas fa-image"></i>
-                        <label for="post-image">
-                            Sube tu foto
-                            <input type="file" name="post-image" id="post-image">
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" id="submit-post">
-                            <i class='far fa-paper-plane'></i> 
-                        </button>
-                    </div>
-                </form>
+    <div class="container-fluid" id="principal">
+        <div class="row px-4 pb-2 pt-5">
+            <div class="col-12 col-md-4">
+                <img src="/storage/{{ Auth::user()->avatar }}" alt="avatar" id="initial-avatar">
+                <div id="user-info-square">
+                    <div class="background">
+                        <p id="username" class="text-right">
+                            Bienvenido
+                            @if (Auth::user()->user_name)
+                                {{ Auth::user()->user_name }}
+                            @else 
+                                {{ Auth::user()->name }}
+                            @endif
+                            !
+                        </p>
+                        <p id="followers-number" class="text-right">
+                            <i class="fas fa-user-plus"></i>
+                            @if (count(Auth::user()->followers) < 2)
+                                {{ count(Auth::user()->followers) }} Seguidor
+                            @else 
+                                {{ count(Auth::user()->followers) }} Seguidores
+                            @endif
+                        </p>
+                    </div> 
+                </div>
             </div>
-        </div>
-        <hr>
-        <div class="row overflow-auto">
-            <!-- Posts -->
-            @forelse ($posts as $post)
-                <div class="post-container col-7 w-100 mx-auto my-2">
-                    <div class="post-user-identifier pt-2">
-                        <div class="user-avatar">
-                            <img src="/storage/{{ $post->postUser->avatar }}" alt="image">
-                        </div>
-                        @if ($post->postUser->user_name)
-                            <div class="user-name-identifier">
-                                {{ $post->postUser->user_name }}
+            <div class="col-12 col-md-8">
+                <div class="row align-items-center">
+                    <div class="col-sm-12">
+                        <h2 style="color: #90c74c;">Viajaste? cuenta tu experiencia!</h2>
+                        <form action="/inicio" method="POST" enctype="multipart/form-data" id="post-form" class="post-form">
+                            @csrf
+                            <div class="user-avatar">
+                                <img src="/storage/{{ Auth::user()->avatar }}" alt="image">
                             </div>
-                        @else 
-                            <div class="user-name-identifier">
-                                {{ $post->postUser->name }}
+                            <div class="form-group">
+                                <textarea class="form-control textarea" name="post-content" id="post-content" cols="100" rows="7" placeholder="Escribe tu viaje..."></textarea>
                             </div>
-                        @endif   
-                    </div> 
-                    <div class="post-content d-flex flex-column">
-                        <div class="post-text-content py-3">
-                            <p>{{ $post->content }}</p>
-                        </div>
-                    <form action="/personas_seguidas" method="POST">
-                        @csrf
-                        <input type="hidden" name="persona" value="{{ $post->user_id }}">
-                        <button type="submit" class="">Seguir</button>
-                    </form>    
-                        @if ($post->image)
-                            <div class="post-image-content pb-3">
-                                <img src="/storage/{{ $post->image }}" alt="Post image" class="img-fluid rounded">
+                            <div class="form-group">
+                                <i class="fas fa-image"></i>
+                                <label for="post-image">
+                                    Sube tu foto
+                                    <input type="file" name="post-image" id="post-image">
+                                </label>
                             </div>
-                        @endif
-                    </div> 
-                    @guest
-                        <div class="comentar" disabled>Comentar</div>  
-                    @endguest
-                    @auth
-                        <div class="commentDiv">
-                            <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
-                            <button class="comentar"><i class="fas fa-comment"></i>Comentar</button>
-                            <form action="/comments" method="POST" enctype="multipart/form-data" class="comments-form">
-                            @csrf    
-                                <input type="text" name="comment-content" class="comment-content" placeholder="comenta..." maxlenght="500">
-                                <input type="hidden" name="post-comment-id" value="{{ $post->id }}">
-                                <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
-                            </form>    
-                        </div>    
-                    @endauth
-                    <!-- Comentarios -->
-                    @foreach ($comments as $comment)
-                        @if ($post->id == $comment->post_id)
-                        <div class="comentarios">
-                            <div class="container">
-                                <div class="row mt-3">
-                                    <div class="col-2">
-                                        <img src="/storage/{{ $comment->userComment->avatar }}" alt="comment-user-avatar">
-                                    </div>
-                                    <div class="col-10">
-                                        @if ($comment->userComment->user_name)
-                                            <p>{{ $comment->userComment->user_name }}</p>
-                                        @else
-                                            <p>{{ $comment->userComment->name }}</p>
-                                        @endif
-                                    </div>
-                                    <div class="col-12">
-                                        <p>{{ $comment->comments }}</p>
-                                    </div>
+                            <div class="form-group">
+                                <button type="submit" id="submit-post">
+                                    <i class='far fa-paper-plane'></i> 
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div class="row overflow-auto">
+                    <!-- Posts -->
+                    @forelse ($posts as $post)
+                        <div class="post-container col-11 w-100 mx-auto px-2 my-2">
+                            <div class="post-image-content pb-3">   
+                                @if ($post->image)
+                                    <img src="/storage/{{ $post->image }}" alt="Post image">
+                                @endif
+                            </div>
+                            <div class="post-user-identifier pl-2 pt-2">
+                                <div class="user-avatar">
+                                    <img src="/storage/{{ $post->postUser->avatar }}" alt="image">
                                 </div>
-                                <hr>
-                                @guest
-                                    <div class="comentar" disabled>Responder</div>  
-                                @endguest
-                                @auth
-                                    <div class="commentDiv">
-                                        <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
-                                        <button class="responder"><i class="fas fa-comment"></i>Responder</button>
-                                        <form action="/responses" method="POST" enctype="multipart/form-data" class="comments-form mb-2">
-                                        @csrf    
-                                            <input type="text" name="response-content" class="comment-content" maxlenght="400">
-                                            <input type="hidden" name="comment-response-id" value="{{ $comment->id }}">
-                                            <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
-                                        </form>    
-                                    </div>    
-                                @endauth
-                            </div>
-                        </div>
-                        <!-- Respuestas de comentarios -->
-                            @foreach ($responses as $response)
-                                @if ($comment->id == $response->comment_id)
-                                    <div class="comentarios">
-                                        <div class="container">
-                                            <div class="row mt-3">
-                                                <div class="col-2">
-                                                    <img src="/storage/{{ $response->responseUser->avatar }}" alt="comment-user-avatar">
-                                                </div>
-                                                <div class="col-10">
-                                                    @if ($response->responseUser->user_name)
-                                                        <p>{{ $response->responseUser->user_name }}</p>
-                                                    @else
-                                                        <p>{{ $response->responseUser->name }}</p>
-                                                    @endif
-                                                </div>
-                                                <div class="col-12">
-                                                    <p>{{ $response->responses }}</p>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            @guest
-                                                <div class="comentar" disabled>Responder</div>  
-                                            @endguest
-                                            @auth
-                                                <div class="commentDiv">
-                                                    <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
-                                                    <button class="comentar"><i class="fas fa-comment"></i>Responder</button>
-                                                    <form action="/responses" method="POST" enctype="multipart/form-data" class="responses-form mb-2">
-                                                    @csrf    
-                                                        <input type="text" name="response-content" class="comment-content" maxlenght="400">
-                                                        <input type="hidden" name="comment-response-id" value="{{ $comment->id }}">
-                                                        <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
-                                                    </form>    
-                                                </div>    
-                                            @endauth
-                                        </div>
+                                @if ($post->postUser->user_name)
+                                    <div class="user-name-identifier">
+                                        {{ $post->postUser->user_name }}
+                                    </div>
+                                @else 
+                                    <div class="user-name-identifier">
+                                        {{ $post->postUser->name }}
                                     </div>
                                 @endif
-                            @endforeach
-                        @endif
-                    @endforeach   
+                                <div class="seguir">
+                                    <form action="/personas_seguidas" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="persona" value="{{ $post->user_id }}">
+                                        <button type="submit" class="comentar"><i class="fas fa-user-plus"></i>Seguir</button>
+                                    </form> 
+                                </div>   
+                            </div> 
+                            <div class="post-content pl-2 d-flex flex-column">
+                                <div class="post-text-content py-3">
+                                    <p>{{ $post->content }}</p>
+                                </div>    
+                            </div> 
+                            @guest
+                                <div class="comentar pl-2" disabled>Comentar</div>  
+                            @endguest
+                            @auth
+                                <div class="commentDiv pl-2">
+                                    <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                    <button class="comentar"><i class="fas fa-comment"></i>Comentar</button>
+                                    <form action="/comments" method="POST" enctype="multipart/form-data" class="comments-form">
+                                    @csrf    
+                                        <input type="text" name="comment-content" class="comment-content" placeholder="comenta..." maxlenght="500">
+                                        <input type="hidden" name="post-comment-id" value="{{ $post->id }}">
+                                        <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
+                                    </form>    
+                                </div>    
+                            @endauth
+                            <hr>
+                            <!-- Comentarios -->
+                            @foreach ($comments as $comment)
+                                @if ($post->id == $comment->post_id)
+                                <div class="comentarios">
+                                    <div class="container pl-2">
+                                        <div class="row mt-3">
+                                            <div class="post-user-identifier">
+                                                <div class="col-2 user-avatar">
+                                                    <img src="/storage/{{ $comment->userComment->avatar }}" alt="comment-user-avatar">
+                                                </div>
+                                                <div class="col-10 pl-4 user-name-identifier">
+                                                    @if ($comment->userComment->user_name)
+                                                        <p>{{ $comment->userComment->user_name }}</p>
+                                                    @else
+                                                        <p>{{ $comment->userComment->name }}</p>
+                                                    @endif
+                                                </div>
+                                                <div class="seguir">
+                                                    <form action="/personas_seguidas" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="persona" value="{{ $post->user_id }}">
+                                                        <button type="submit" class="comentar"><i class="fas fa-user-plus"></i>Seguir</button>
+                                                    </form> 
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <p>{{ $comment->comments }}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        @guest
+                                            <div class="comentar" disabled>Responder</div>  
+                                        @endguest
+                                        @auth
+                                            <div class="commentDiv">
+                                                <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                                <button class="responder"><i class="fas fa-comment"></i>Responder</button>
+                                                <form action="/responses" method="POST" enctype="multipart/form-data" class="comments-form mb-2">
+                                                @csrf    
+                                                    <input type="text" name="response-content" class="comment-content" maxlenght="400">
+                                                    <input type="hidden" name="comment-response-id" value="{{ $comment->id }}">
+                                                    <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
+                                                </form>    
+                                            </div>    
+                                        @endauth
+                                    </div>
+                                </div>
+                                <!-- Respuestas de comentarios -->
+                                    @foreach ($responses as $response)
+                                        @if ($comment->id == $response->comment_id)
+                                            <div class="comentarios resp">
+                                                <div class="container">
+                                                    <div class="row mt-3">
+                                                        <div class="post-user-identifier">
+                                                            <div class="col-2 user-avatar">
+                                                                <img src="/storage/{{ $response->responseUser->avatar }}" alt="comment-user-avatar">
+                                                            </div>
+                                                            <div class="col-10 pl-4 user-name-identifier">
+                                                                @if ($response->responseUser->user_name)
+                                                                    <p>{{ $response->responseUser->user_name }}</p>
+                                                                @else
+                                                                    <p>{{ $response->responseUser->name }}</p>
+                                                                @endif
+                                                            </div>
+                                                            <div class="seguir">
+                                                                <form action="/personas_seguidas" method="POST">
+                                                                    @csrf
+                                                                    <input type="hidden" name="persona" value="{{ $post->user_id }}">
+                                                                    <button type="submit" class="comentar"><i class="fas fa-user-plus"></i>Seguir</button>
+                                                                </form> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <p>{{ $response->responses }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    @guest
+                                                        <div class="comentar" disabled>Responder</div>  
+                                                    @endguest
+                                                    @auth
+                                                        <div class="commentDiv">
+                                                            <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                                            <button class="comentar"><i class="fas fa-comment"></i>Responder</button>
+                                                            <form action="/responses" method="POST" enctype="multipart/form-data" class="responses-form mb-2">
+                                                            @csrf    
+                                                                <input type="text" name="response-content" class="comment-content" maxlenght="400">
+                                                                <input type="hidden" name="comment-response-id" value="{{ $comment->id }}">
+                                                                <button type="submit" class="submit-comment"><i class="fas fa-share"></i></button>
+                                                            </form>    
+                                                        </div>    
+                                                    @endauth
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach   
+                        </div>
+                    @empty
+                        <em>¡SE EL PRIMERO EN CONTAR TU EXPERIENCIA EN VIAGGIO!</em>
+                    @endforelse
                 </div>
-            @empty
-                <em>¡SE EL PRIMERO EN CONTAR TU EXPERIENCIA EN VIAGGIO!</em>
-            @endforelse
+            </div>
         </div>
     </div>
     <script src="{{ asset('/js/inicio.js') }}"></script>
     <style>
-        #image-container img{
+
+        header {
+            background-color: white;
+            box-shadow:  0px 10px 10px grey;
+            height: 140px !important;
+            width: 100%;
+        }
+
+        header a {
+            color: black;
+        }
+
+        header i {
+            color: #badc58;
+            font-size: 25px;
+            margin-right: 8px;
+        }
+
+        img[alt=viaggio] {
+            height: 80px;
+            width: 270px;
+        }
+
+        #user-info-square {
+            background-image: url('/storage/2-forest.jpg');
+            background-repeat: no-repeat;            
+            background-size: cover;
+            color: white;
+            font-weight: bold;
+            width: 350px;
+            height: 160px;
+            border-radius: 10px;
+        }
+
+        .background {
+            background-color: #90c74c;
+            opacity: 0.8;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+        }
+
+        #initial-avatar {
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            float: right;
-            border: 1px solid black;
+            border: 5px solid white;
+            position: absolute;
         }
 
-        #exampleFormControlSelect1 {
-            margin-top: 6px;
-        }
-
-        .nav-link {
-            color: #d1d8e0 !important;
-        }
-
-        label[for=post-content] {
+        h2 {
             cursor: pointer;
         }
 
-        .textarea {
+        .post-form {
             display: none;
+        }
+
+        .textarea {
             transition: display 2s linear;
         }
 
         .post-container {
-            background-color: #45aaf2; /*honeydew;*/
-            color: #d1d8e0;
+            background-color: white; 
+            color: black;
             font-weight: bold;
             height: 100%;
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
-            border-radius: 5px;
+            box-shadow: 0px 10px 10px grey;
         }
 
         .post-user-identifier {
@@ -261,27 +355,34 @@
         }
 
         .user-avatar img, img[alt=comment-user-avatar] {
-            width: 50px;
-            height: 50px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
         }
 
         .user-name-identifier {
-            margin-left: 10px;
+            margin-left: 15px;
         }
 
-        main .container-fluid {
+        .seguir {
+            position: relative;
+            float: right;
+            margin-left: 15px;
+            padding-left: 15px;
+        }
+
+        #principal {
             height: auto;
-            background-color: #4b7bec;
+            background-color: #fafbfc;
         }
 
         .post-image-content {
             height: inherit;
         }
 
-        .post-image-content img {
+        img[alt="Post image"] {
+            height: 100%;
             width: 100%;
-            height: 60%;
         }
 
         .container-fluid {
@@ -333,10 +434,16 @@
 
         .fa-comment {
             padding-right: 3px;
+            color: #90c74c;
         }
 
         .fa-thumbs-up {
             padding-right: 3px;
+            color: #90c74c;
+        }
+
+        .fa-user-plus {
+            color: #90c74c;
         }
 
         .comentar:hover, .responder:hover, .likes:hover {
@@ -368,7 +475,7 @@
         }
 
         .comentarios {
-            background-color: #dff9fb;
+            background-color: lightgrey;
             border-radius: 15px;
             color: black;
             margin-top: 5px;
@@ -381,6 +488,11 @@
         .comentarios p {
             display: inline-block;
             padding-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .resp {
+            left: 50px;
         }
     </style>
 @endsection
