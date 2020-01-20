@@ -89,7 +89,6 @@ function displayLikes(event) {
 }
 
 function setInitialAvatarPosition() {
-    initialAvatar.style.zIndex = 900;
     initialAvatar.style.top = "-20px";
     initialAvatar.style.left = "40px";
 }

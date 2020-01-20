@@ -26,4 +26,13 @@ class ResponseController extends Controller
             return redirect("/login");
         }
     }
+
+    public function responseLikes(Request $req) {
+        $response = Response::find($req["response-id-like"]);
+        $acumulateResponseLikes = $req["counted-response-likes"] + $req["response-like"];
+        $comment->likes = $acumulateResponseLikes;
+        $comment->save();
+
+        return back();
+    }
 }

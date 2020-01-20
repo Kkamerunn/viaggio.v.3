@@ -25,14 +25,14 @@ class PostController extends Controller
 
                 $post->save();
 
-                return redirect("/inicio");       
+                return back();       
             } else {
                 $post->content = $req["post-content"];
                 $post->user_id = $userlog->id;
 
                 $post->save();
 
-                return redirect("/inicio"); 
+                return back(); 
             }
         } else {
             return redirect("/login");

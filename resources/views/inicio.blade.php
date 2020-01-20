@@ -80,7 +80,7 @@
     <div class="container-fluid" id="principal">
         <div class="row px-4 pb-2 pt-5">
             <div class="col-12 col-md-4">
-                <img src="/storage/{{ Auth::user()->avatar }}" alt="avatar" id="initial-avatar">
+                <img src="/storage/{{ Auth::user()->avatar }}" alt="avatar" id="initial-avatar" style="z-index: 2;">
                 <div id="user-info-square">
                     <div class="background">
                         <p id="username" class="text-right">
@@ -93,8 +93,8 @@
                             !
                         </p>
                         <p id="followers-number" class="text-right">
-                            <i class="fas fa-user-plus"></i>
-                            @if (count(Auth::user()->followers) < 2)
+                            tenes 
+                            @if (count(Auth::user()->followers) > 0 && count(Auth::user()->followers) < 2)
                                 {{ count(Auth::user()->followers) }} Seguidor
                             @else 
                                 {{ count(Auth::user()->followers) }} Seguidores
@@ -109,23 +109,27 @@
                         <h2 style="color: #90c74c;">Viajaste? cuenta tu experiencia!</h2>
                         <form action="/inicio" method="POST" enctype="multipart/form-data" id="post-form" class="post-form">
                             @csrf
-                            <div class="user-avatar">
-                                <img src="/storage/{{ Auth::user()->avatar }}" alt="image">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control textarea" name="post-content" id="post-content" cols="100" rows="7" placeholder="Escribe tu viaje..."></textarea>
-                            </div>
-                            <div class="form-group">
-                                <i class="fas fa-image"></i>
-                                <label for="post-image">
-                                    Sube tu foto
-                                    <input type="file" name="post-image" id="post-image">
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" id="submit-post">
-                                    <i class='far fa-paper-plane'></i> 
-                                </button>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-2 user-avatar">
+                                        <img src="/storage/{{ Auth::user()->avatar }}" alt="image">
+                                    </div>
+                                    <div class="col-7 form-group">
+                                        <textarea class="form-control textarea" name="post-content" id="post-content" cols="100" rows="7" placeholder="Escribe tu viaje..."></textarea>
+                                    </div>
+                                    <div class="col-2 form-group">
+                                        <i class="fas fa-image"></i>
+                                        <label for="post-image">
+                                            Sube tu foto
+                                            <input type="file" name="post-image" id="post-image">
+                                        </label>
+                                    </div>
+                                    <div class="col-1 form-group">
+                                        <button type="submit" id="submit-post">
+                                            <i class='far fa-paper-plane'></i> 
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -169,6 +173,7 @@
                                     </div>
                                 @endif 
                             </div> 
+                            <span class="likes-space"><i class="far fa-thumbs-up"></i>{{ $post->likes }}</span>
                             <div class="post-content pl-2 d-flex flex-column">
                                 <div class="post-text-content py-3">
                                     <p>{{ $post->content }}</p>
@@ -179,7 +184,14 @@
                             @endguest
                             @auth
                                 <div class="commentDiv pl-2">
-                                    <button class="likes" name="like_post"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                    <form action="/inicio" method="POST">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="postId" value="{{ $post->id }}">
+                                        <input type="hidden" name="post-like" value="{{ 1 }}">
+                                        <input type="hidden" name="counted-likes" value="{{ $post->likes }}">
+                                        <button type="submit" class="likes"><i class="far fa-thumbs-up"></i>Like</button>
+                                    </form>
                                     <button class="comentar"><i class="fas fa-comment"></i>Comentar</button>
                                     <form action="/comments" method="POST" enctype="multipart/form-data" class="comments-form">
                                     @csrf    
@@ -223,6 +235,7 @@
                                                     </div>
                                                 @endif 
                                             </div>
+                                            <span class="likes-space"><i class="far fa-thumbs-up"></i>{{ $comment->likes }}</span>
                                             <div class="col-12">
                                                 <p>{{ $comment->comments }}</p>
                                             </div>
@@ -233,7 +246,14 @@
                                         @endguest
                                         @auth
                                             <div class="commentDiv">
-                                                <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                                <form action="/comments" method="POST">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <input type="hidden" name="comment-id-like" value="{{ $comment->id }}">
+                                                    <input type="hidden" name="comment-like" value="{{ 1 }}">
+                                                    <input type="hidden" name="counted-comment-likes" value="{{ $comment->likes }}">
+                                                    <button type="submit" class="likes"><i class="far fa-thumbs-up"></i>Like</button>
+                                                </form>
                                                 <button class="responder"><i class="fas fa-comment"></i>Responder</button>
                                                 <form action="/responses" method="POST" enctype="multipart/form-data" class="comments-form mb-2">
                                                 @csrf    
@@ -288,7 +308,6 @@
                                                     @endguest
                                                     @auth
                                                         <div class="commentDiv">
-                                                            <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
                                                             <button class="comentar"><i class="fas fa-comment"></i>Responder</button>
                                                             <form action="/responses" method="POST" enctype="multipart/form-data" class="responses-form mb-2">
                                                             @csrf    
@@ -339,6 +358,8 @@
             border-radius: 50%;
             border: 5px solid white;
             position: absolute;
+            left: 30px;
+            top: -30px;
         }
 
         h2 {
@@ -350,6 +371,7 @@
         }
 
         .textarea {
+            background-color: inherit;
             transition: display 2s linear;
         }
 
@@ -417,11 +439,16 @@
         }
 
         #submit-post {
-            background-color: #4b7bec;
+            background-color: inherit;
             border: 0;
             transition: background-color 1s;
             color: #d1d8e0;
             font-weight: bold;
+        }
+
+        #submit-post:hover {
+            background-color: #90c74c;
+            cursor: pointer;
         }
 
         button[type=submit]:active {
@@ -510,6 +537,18 @@
             width: 110px;
             height: 50px;
             border: 1px solid black;
+        }
+
+        #username {
+            position: relative;
+            right: 10px;
+            top: 60px;
+        }
+
+        #followers-number {
+            position: relative;
+            right: 10px;
+            top: 60px;
         }
     </style>
 @endsection

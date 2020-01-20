@@ -84,3 +84,12 @@ img[alt=viaggio] {
     color: #90c74c;
     font-weight: bolder;
 }
+
+.fa-paper-plane {
+    color: #90c74c;
+}
+
+.fa-paper-plane:hover {
+    color: white;
+    cursor: pointer;
+}

@@ -25,6 +25,8 @@ Route::get('/inicio', 'InicioController@init')->name('inicio');
 
 Route::post('/inicio', 'PostController@uploadPost');
 
+Route::put('/inicio', 'InicioController@likes');
+
 Route::get('/perfil/{id}', 'PerfilController@show');
 
 // FAQ´S
@@ -49,7 +51,11 @@ Route::put('/editar/{id}', 'EditarController@editar')->name('editar');
 
 Route::post('/comments', 'CommentController@uploadComment');
 
+Route::put('/comments', 'CommentController@commentLikes');
+
 Route::post('/responses', 'ResponseController@uploadReponse');
+
+Route::put('/responses', 'ResponseController@responseLikes');
 
 Route::get('/terminos_y_condiciones', function() {
     return view('terminos_y_condiciones');

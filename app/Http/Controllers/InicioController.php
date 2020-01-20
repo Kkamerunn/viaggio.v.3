@@ -8,6 +8,7 @@ use Auth;
 use App\Comment;
 use App\Response;
 
+
 class InicioController extends Controller
 {
 
@@ -20,5 +21,14 @@ class InicioController extends Controller
 
         return view('inicio', $vac);
     } 
+
+    public function likes(Request $req) {
+        $post = Post::find($req["postId"]);
+        $acumulatePostLikes = $req["counted-likes"] + $req["post-like"];
+        $post->likes = $acumulatePostLikes;
+        $post->save();
+
+        return back();
+    }
 
 }

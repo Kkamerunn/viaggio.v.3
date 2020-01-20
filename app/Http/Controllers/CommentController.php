@@ -25,4 +25,13 @@ class CommentController extends Controller
         }
     }
 
+    public function commentLikes(Request $req) {
+        $comment = Comment::find($req["comment-id-like"]);
+        $acumulateCommentLikes = $req["counted-comment-likes"] + $req["comment-like"];
+        $comment->likes = $acumulateCommentLikes;
+        $comment->save();
+
+        return back();
+    }
+
 }
