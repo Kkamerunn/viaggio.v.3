@@ -29,6 +29,14 @@
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/d9e6b5e683.js" crossorigin="anonymous"></script>
 
+    <!-- SweetAlertjs -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+
+    <!-- Other Styles -->
+
     <style>
         html {
             height: auto;

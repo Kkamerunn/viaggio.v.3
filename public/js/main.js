@@ -16,7 +16,11 @@ let followerName = document.querySelectorAll("follower-name"),
 
     footer = document.querySelector('footer'),
 
-    footerAnchors = footer.getElementsByTagName("a");
+    footerAnchors = footer.getElementsByTagName("a"),
+
+    btnSiguiendo = document.querySelectorAll(".siguiendo"),
+
+    btnPostLike = document.querySelectorAll("button[name=like_post]");
 
 // Functions
 
@@ -63,6 +67,17 @@ dropDownBlackBtn.onclick = changeBodyBackColor;
 
 dropDownWhiteBtn.onclick = changeBodyBackColor;
 
+/*
+for (bt of btnSiguiendo) {
+    bt.addEventListener('click', () => {
+        swal({
+            title: "Seguido!",
+            text: "ya estas siguiendo a esta persona actualmente!",
+            icon: "success",
+          });
+    });
+}
+*/
 
 
 

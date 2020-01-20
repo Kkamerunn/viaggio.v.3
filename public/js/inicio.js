@@ -22,13 +22,13 @@ var commentDiv = document.querySelectorAll(".commentDiv");
 
 var numOfLikes = document.querySelector("sup");
 
-var likes = document.querySelectorAll(".likes");
-
 let initialAvatar = document.getElementById("initial-avatar"),
 
     userInfoSquare = document.getElementById("user-info-square"),
     
     postForm = document.getElementById("post-form");
+
+
 
 /*
 ------------
@@ -115,10 +115,6 @@ principalTitle.addEventListener('click', () => {
 
 for (let i = 0; i < comments.length; i++) {
     comments[i].addEventListener('click', displayCommentInput);
-}
-
-for (let i = 0; i < likes.length; i++) {
-    likes[i].addEventListener('click', displayLikes);
 }
 
 for (let i = 0; i < responses.length; i++) {

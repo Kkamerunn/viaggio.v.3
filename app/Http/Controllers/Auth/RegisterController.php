@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/inicio';
 
     /**
      * Create a new controller instance.
@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'user_name' => ['string', 'min:5', 'max:10'],
             'avatar' => ['file'],
+            //'terms_and_conditions' => ['in:checked'],
         ]);
     }
 
@@ -71,6 +72,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'user_name' => $data['user_name'],
             'avatar' => basename($data['avatar']->store('public')),
+            //'terms_and_conditions' => $data['terms'],
         ]);
     }
 

@@ -153,13 +153,21 @@
                                         {{ $post->postUser->name }}
                                     </div>
                                 @endif
-                                <div class="seguir">
-                                    <form action="/personas_seguidas" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="persona" value="{{ $post->user_id }}">
-                                        <button type="submit" class="comentar"><i class="fas fa-user-plus"></i>Seguir</button>
-                                    </form> 
-                                </div>   
+                                @if ($post->postUser->followers->contains(Auth::user()->id))
+                                    <div class="siguiendo">
+                                        <button type="submit" class="comentar" style="width: max-content;" disabled><i class="fas fa-user-plus"></i>Seguiendo...</button>
+                                    </div>
+                                @elseif ($post->postUser->id == Auth::user()->id)
+                                    <div></div>
+                                @else 
+                                    <div class="seguir">
+                                        <form action="/personas_seguidas" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="persona" value="{{ $post->user_id }}">
+                                            <button type="submit" class="comentar" style="width: max-content;"><i class="fas fa-user-plus"></i>Seguir</button>
+                                        </form> 
+                                    </div>
+                                @endif 
                             </div> 
                             <div class="post-content pl-2 d-flex flex-column">
                                 <div class="post-text-content py-3">
@@ -171,7 +179,7 @@
                             @endguest
                             @auth
                                 <div class="commentDiv pl-2">
-                                    <button class="likes"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
+                                    <button class="likes" name="like_post"><i class="far fa-thumbs-up"></i>Like</button><sup></sup>
                                     <button class="comentar"><i class="fas fa-comment"></i>Comentar</button>
                                     <form action="/comments" method="POST" enctype="multipart/form-data" class="comments-form">
                                     @csrf    
@@ -189,23 +197,31 @@
                                     <div class="container pl-2">
                                         <div class="row mt-3">
                                             <div class="post-user-identifier">
-                                                <div class="col-2 user-avatar">
+                                                <div class="col-3 user-avatar">
                                                     <img src="/storage/{{ $comment->userComment->avatar }}" alt="comment-user-avatar">
                                                 </div>
-                                                <div class="col-10 pl-4 user-name-identifier">
+                                                <div class="col-6 pl-4 user-name-identifier">
                                                     @if ($comment->userComment->user_name)
                                                         <p>{{ $comment->userComment->user_name }}</p>
                                                     @else
                                                         <p>{{ $comment->userComment->name }}</p>
                                                     @endif
                                                 </div>
-                                                <div class="seguir">
-                                                    <form action="/personas_seguidas" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="persona" value="{{ $post->user_id }}">
-                                                        <button type="submit" class="comentar"><i class="fas fa-user-plus"></i>Seguir</button>
-                                                    </form> 
-                                                </div>
+                                                @if ($comment->userComment->followers->contains(Auth::user()->id))
+                                                    <div class="col-3 siguiendo">
+                                                        <button type="submit" class="comentar" style="width: max-content;" disabled><i class="fas fa-user-plus"></i>Siguiendo...</button>
+                                                    </div>
+                                                @elseif ($comment->userComment->id == Auth::user()->id)
+                                                    <div></div>
+                                                @else 
+                                                    <div class="col-3 seguir">
+                                                        <form action="/personas_seguidas" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="persona" value="{{ $comment->userComment->id }}">
+                                                            <button type="submit" class="comentar" style="width: max-content;"><i class="fas fa-user-plus"></i>Seguir</button>
+                                                        </form> 
+                                                    </div>
+                                                @endif 
                                             </div>
                                             <div class="col-12">
                                                 <p>{{ $comment->comments }}</p>
@@ -236,23 +252,31 @@
                                                 <div class="container">
                                                     <div class="row mt-3">
                                                         <div class="post-user-identifier">
-                                                            <div class="col-2 user-avatar">
+                                                            <div class="col-3 user-avatar">
                                                                 <img src="/storage/{{ $response->responseUser->avatar }}" alt="comment-user-avatar">
                                                             </div>
-                                                            <div class="col-10 pl-4 user-name-identifier">
+                                                            <div class="col-6 pl-4 user-name-identifier">
                                                                 @if ($response->responseUser->user_name)
                                                                     <p>{{ $response->responseUser->user_name }}</p>
                                                                 @else
                                                                     <p>{{ $response->responseUser->name }}</p>
                                                                 @endif
                                                             </div>
-                                                            <div class="seguir">
-                                                                <form action="/personas_seguidas" method="POST">
-                                                                    @csrf
-                                                                    <input type="hidden" name="persona" value="{{ $post->user_id }}">
-                                                                    <button type="submit" class="comentar"><i class="fas fa-user-plus"></i>Seguir</button>
-                                                                </form> 
-                                                            </div>
+                                                            @if ($response->responseUser->followers->contains(Auth::user()->id))
+                                                                <div class="col-3 siguiendo">
+                                                                    <button type="submit" class="comentar" style="width: max-content;" disabled><i class="fas fa-user-plus"></i>Siguiendo...</button>
+                                                                </div>
+                                                            @elseif ($response->responseUser->id == Auth::user()->id)
+                                                                <div></div>
+                                                            @else 
+                                                                <div class="col-3 seguir">
+                                                                    <form action="/personas_seguidas" method="POST">
+                                                                        @csrf
+                                                                        <input type="hidden" name="persona" value="{{ $response->responseUser->id }}">
+                                                                        <button type="submit" class="comentar" style="width: max-content;"><i class="fas fa-user-plus"></i>Seguir</button>
+                                                                    </form> 
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                         <div class="col-12">
                                                             <p>{{ $response->responses }}</p>
@@ -356,11 +380,15 @@
             margin-left: 15px;
         }
 
-        .seguir {
+        .seguir, .siguiendo {
             position: relative;
             float: right;
             margin-left: 15px;
             padding-left: 15px;
+        }
+
+        .siguiendo {
+            opacity: 0.7;
         }
 
         #principal {
@@ -468,7 +496,7 @@
         }
 
         .resp {
-            left: 50px;
+            left: 150px;
         }
 
         #drop-drown-color-div-1 {
