@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request as RequestMethods;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,30 +39,57 @@ Route::get('/faq', function() {
 
 // EN PERFIL: SEGUIDORES Y PERSONAS SEGUIDAS + EDICION DE DATOS PERSONALES
 
-Route::get('/personas_seguidas', 'FollowerController@following');
+Route::middleware('auth')->group(function() {
 
-Route::post('/personas_seguidas', 'FollowerController@follow');
+    Route::get('/personas_seguidas', 'FollowerController@following');
 
-Route::delete('/eliminar/{id}', 'FollowerController@stopFollowing')->name('eliminar');
+    Route::post('/personas_seguidas', 'FollowerController@follow');
 
-Route::get('/seguidores', 'FollowerController@followers');
+    Route::delete('/eliminar/{id}', 'FollowerController@stopFollowing')->name('eliminar');
 
-Route::get('/editar', 'EditarController@index')->name('editar');
+    Route::get('/seguidores', 'FollowerController@followers');
 
-Route::put('/editar/{id}', 'EditarController@editar')->name('editar');
+    Route::get('/editar', 'EditarController@index')->name('editar');
 
-Route::post('/comments', 'CommentController@uploadComment');
+    Route::put('/editar/{id}', 'EditarController@editar')->name('editar');
 
-Route::put('/comments', 'CommentController@commentLikes');
+    Route::post('/comments', 'CommentController@uploadComment');
 
-Route::post('/responses', 'ResponseController@uploadReponse');
+    Route::put('/comments', 'CommentController@commentLikes');
 
-Route::put('/responses', 'ResponseController@responseLikes');
+    Route::post('/responses', 'ResponseController@uploadReponse');
+
+    Route::put('/responses', 'ResponseController@responseLikes');
+
+});
+
 
 Route::get('/terminos_y_condiciones', function() {
     return view('terminos_y_condiciones');
 });
 
-Route::get('/contacto', function() {
-    return view('contacto');
+Route::get('/contacto', function(RequestMethods $request) {
+    return view('contacto', ['url' => $request->fullUrl()]);
+});
+
+Route::view('/saludo', 'saludo', ['saludos' => 'Hola, bienvenidos a mi proyecto en laravel']);
+
+Route::get('/despedida', 'Despedida');
+
+/*
+-------------------
+CONSUMIENDO UNA API
+-------------------
+*/
+
+Route::get('/clima', 'ClimaController@verClima');
+
+/*
+----------------------------------------------------
+VISTA POR DEFAULT SI NO SE ENCUENTRA LA QUE SE BUSCA
+----------------------------------------------------
+*/
+
+Route::fallback(function() {
+    return view('welcome');
 });

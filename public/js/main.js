@@ -67,17 +67,5 @@ dropDownBlackBtn.onclick = changeBodyBackColor;
 
 dropDownWhiteBtn.onclick = changeBodyBackColor;
 
-/*
-for (bt of btnSiguiendo) {
-    bt.addEventListener('click', () => {
-        swal({
-            title: "Seguido!",
-            text: "ya estas siguiendo a esta persona actualmente!",
-            icon: "success",
-          });
-    });
-}
-*/
-
 
 

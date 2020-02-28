@@ -19,7 +19,7 @@ class CommentController extends Controller
             $comment->user_id = $userlog->id;
             $comment->save();
 
-            return redirect("/inicio");
+            return back();
         } else {
             return redirect("/login");
         }

@@ -21,7 +21,7 @@ class ResponseController extends Controller
             $response->comment_id = $req["comment-response-id"];
             $response->save();
 
-            return redirect("/inicio");
+            return back();
         } else {
             return redirect("/login");
         }

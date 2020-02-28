@@ -7,6 +7,7 @@ use App\Post;
 use Auth;
 use App\Comment;
 use App\Response;
+use Cookie;
 
 
 class InicioController extends Controller
@@ -18,8 +19,9 @@ class InicioController extends Controller
         $comments = Comment::all();
         $responses = Response::all();
         $vac = compact('posts', 'comments', 'responses');
+        Cookie::queue('cookie1', 'vitamina D', 80);
 
-        return view('inicio', $vac);
+        return response(view('inicio', $vac))->cookie('cookie2', 'vitamina C', 80);
     } 
 
     public function likes(Request $req) {

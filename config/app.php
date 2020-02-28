@@ -125,6 +125,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Blacklist for obsecuring some env variables  20/02/2020
+    |--------------------------------------------------------------------------
+    |
+    | This will block the view of some env variables
+    |
+    */ 
+
+    'debug_blacklist' => [
+        '_ENV' => [
+            'APP_KEY'
+        ],
+        '_SEVER' => [
+            'APP_KEY'
+        ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -174,6 +192,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Ixudra\Curl\CurlServiceProvider::class,
 
     ],
 
@@ -225,6 +244,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Curl'          => Ixudra\Curl\Facades\Curl::class,
 
     ],
 

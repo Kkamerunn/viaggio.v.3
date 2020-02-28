@@ -63,6 +63,7 @@
 @endsection
 
 @section('content')
+    <h2>La url que acabas de acceder es <span class="text-warning">{{ $url }}</span></h2>
     <div class="container my-5">
         <div class="row justify-content-center contacto">
             <div class="col-12 col-sm-7 mt-2">
